@@ -1,0 +1,43 @@
+:host{
+  z-index: 1;
+}
+.card-body:hover{
+    background-color: #d0d0ce;
+}
+@keyframes slideDown {
+    from {
+      top: -350px; /* Empieza fuera de la vista */
+    }
+    to {
+      top: 100px; /* Termina en su posición visible */
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      top: 0; /* Empieza en su posición visible */
+    }
+    to {
+      top: -350px; /* Termina fuera de la vista */
+    }
+  }
+  
+  .menu {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+  
+  .menu.show {
+    animation: slideDown 1s ease-in-out forwards;
+  }
+  
+  .menu.hide {
+    animation: slideUp 1s ease-in-out forwards;
+  }
+  
+  

@@ -1,0 +1,37 @@
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a  routerLink="/admin/access-done" 
+        routerLinkActive="active">access-done</a></li>
+      <li class="breadcrumb-item"><a routerLink="/admin/access-done/admin-stock" 
+        routerLinkActive="active" >admin-stock</a></li>
+      <li class="breadcrumb-item " aria-current="page">view details</li>
+    </ol>
+  </nav>
+
+  <div class="history-container">
+    <h2>Historial de Producto</h2>
+    <ul *ngIf="history.length > 0; else noHistory">
+      <li
+        *ngFor="let record of history; let i = index"
+        [ngClass]="{
+          'bg-red': record.accion === 'cantidad restada',
+          'bg-green': record.accion === 'cantidad agregada'
+        }"
+      >
+        <p><strong>Acción:</strong> {{ record.accion }}</p>
+        <p><strong>Fecha:</strong> {{ record.fecha | date: 'short' }}</p>
+        <p><strong>Cantidad cambiada:</strong> {{ record.cantidadCambiada }}</p>
+        <p><strong>Nota:</strong> {{ record.nota }}</p>
+        <button (click)="deleteRecord(i, record._id)" class="btn btn-danger">
+          Eliminar
+        </button>
+        <hr />
+      </li>
+    </ul>
+    <ng-template #noHistory>
+      <p>No hay historial disponible para este producto.</p>
+    </ng-template>
+  </div>
+  
+  

@@ -1,0 +1,90 @@
+:host{
+    display: block;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+   
+}
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .title-container h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin: 0;
+  }
+  
+  
+.container {
+    text-align: center;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+     padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 800px;
+  }
+
+  .left-panel , .right-panel{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    height: 300px;
+  }
+  
+  .left-panel label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .left-panel .availability {
+    font-size: 1em;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  img{
+    max-width: 100%; /* Asegura que la imagen no supere el ancho del contenedor */
+    max-height: 100%; /* Asegura que la imagen no supere la altura asignada */
+    object-fit: contain; /* Ajusta el contenido manteniendo la relación de aspecto */
+  }
+
+  .product-container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-title h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .product-price p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff5722; /* Color llamativo para el precio */
+    margin: 0;
+  }
+  

@@ -1,0 +1,89 @@
+h2{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: auto;
+}
+
+/* Contenedor del grid */
+.grid-container {
+    display: grid;
+    gap: 16px; /* Espaciado entre elementos */
+    padding: 16px;
+  }
+  
+  /* Estilos para pantallas más grandes (por defecto) */
+  @media (min-width: 760px) {
+    .grid-container {
+      grid-template-columns: repeat(5, 1fr); /* 5 columnas iguales */
+    }
+  }
+  
+  /* Estilos para pantallas menores a 760px */
+  @media (max-width: 759px) {
+    .grid-container {
+      grid-template-columns: 1fr; /* 1 columna por fila */
+    }
+  }
+  
+  /* Estilos para cada ítem */
+.item {
+    background-color: #007bff; /* Fondo azul */
+    height: 200px;
+    color: white; /* Texto blanco */
+    text-align: center; /* Centrar texto horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    font-size: 18px; /* Tamaño de letra */
+    font-weight: bold; /* Negrita */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animación suave */
+  }
+  
+  /* Efecto hover */
+  .item:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Incrementa la sombra */
+  }
+
+  /* Contenedor flex */
+.flex-container {
+    display: flex;
+    gap: 16px; /* Espacio entre los ítems */
+    padding: 16px; /* Espacio interno alrededor del contenedor */
+    background-color: #f4f4f4; /* Fondo suave */
+    border-radius: 8px; /* Bordes redondeados para el contenedor */
+    box-sizing: border-box; /* Asegura que el padding no desborde el contenedor */
+  }
+  
+  /* Ítems flexibles */
+  .item-flex {
+    flex: 1; /* Cada ítem ocupa el mismo espacio */
+    background-color: #007bff; /* Fondo azul */
+    color: white; /* Color de texto */
+    height: 150px; /* Altura fija, ajustable según tus necesidades */
+    border-radius: 8px; /* Bordes redondeados */
+    display: flex; /* Centra el contenido dentro de los ítems */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+  }
+  
+  /* Efecto hover */
+  .item-flex:hover {
+    background-color: #0056b3; /* Cambia el color en hover */
+    transform: scale(1.02); /* Aumenta ligeramente el tamaño */
+    transition: transform 0.3s, background-color 0.3s; /* Animación suave */
+  }
+  
+  .video-muestra {
+    background-color: #007bff !important;; /* Fondo azul */
+    height: 200px;
+    max-width: 500px; /* Máximo ancho de 500px */
+    margin: 0 auto; /* Centrado horizontal */
+    background-color: #f4f4f4; /* Opcional, color de fondo para visualizarlo */
+    padding: 16px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+  }
+  

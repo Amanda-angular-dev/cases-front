@@ -1,0 +1,52 @@
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a  routerLink="/admin/access-done" 
+        routerLinkActive="active">access-done</a></li>
+      <li class="breadcrumb-item"><a routerLink="/admin/access-done/admin-stock" 
+        routerLinkActive="active" >admin-stock</a></li>
+      <li class="breadcrumb-item " aria-current="page">edit</li>
+    </ol>
+  </nav>
+
+<div class="container">
+  <h2>Actualizar Cantidad</h2>
+
+  <form [formGroup]="updateQuantityForm" (ngSubmit)="editQuantity()">
+    <label for="nombreCaso">Nombre del caso:</label>
+    <input id="nombreCaso" type="text" [value]="nombreCaso" readonly class="readonly-input" />
+
+    <label for="borderColor">border color</label>
+    <input id="borderColor" type="text" [value]="borderColor" readonly class="readonly-input" />
+
+    <label for="cantidadActual">Cantidad Actual:</label>
+    <input
+      id="cantidadActual"
+      formControlName="cantidad"
+      type="number"
+      readonly
+      class="readonly-input"
+    />
+
+    <label for="cantidadEditar">Cantidad a agregar o quitar:</label>
+    <input
+      id="cantidadEditar"
+      formControlName="cantidadEditar"
+      type="number"
+      placeholder="Ingresa la cantidad"
+      class="form-input"
+    />
+
+    <label for="nota">Nota:</label>
+    <textarea
+      id="nota"
+      formControlName="nota"
+      placeholder="Añade una nota (opcional)"
+      class="form-input"
+    ></textarea>
+
+    <button type="submit" [disabled]="updateQuantityForm.invalid" class="submit-btn">
+      Actualizar Cantidad
+    </button>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+.admin-sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40; /* Gris oscuro de Bootstrap */
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .admin-sidebar .nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .admin-sidebar .nav-item {
+    margin-bottom: 10px;
+  }
+  
+  .admin-sidebar .nav-link {
+    display: block;
+    color: #cfd8dc; /* Gris claro */
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: left;
+    text-decoration: none; /* Elimina el subrayado */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .admin-sidebar .nav-link:hover {
+    background-color: #495057; /* Gris oscuro intermedio */
+    color: #fff; /* Blanco puro */
+  }
+  
+  .admin-sidebar .nav-link.active {
+    background-color: #007bff; /* Azul Bootstrap */
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .admin-sidebar .nav-link.disabled {
+    color: #6c757d; /* Gris deshabilitado de Bootstrap */
+    cursor: not-allowed;
+  }
+  

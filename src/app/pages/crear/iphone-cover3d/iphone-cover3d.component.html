@@ -1,0 +1,55 @@
+
+
+<div class="container">
+  
+  <div class="left-panel">
+     <img [src]="selectedPhone?.image || './assets/iphone-c.png'" alt="Celular" class="phone-image" />
+  </div>
+  <div class="right-panel">
+    <h4>Iphone Cover 3D</h4>
+    <p>$ 90.000</p>
+    <div class="select-container">
+      <label for="phone-select">Modelo</label>
+      <select id="phone-select" (change)="onPhoneSelect($event)" class="form-select" aria-label="Default select example">
+        <option value="" disabled selected>Choose your phone</option>
+        <option *ngFor="let phone of phonesNombres" [value]="phone.nombre">{{ phone.nombre }}</option>
+      </select>
+      
+    </div>
+    <div *ngIf="messageErrorChoiceAModel" class="form-text" style="all: unset; color: red; margin-top: 0; margin-bottom: 0.25rem; text-align: left;">
+       please choice a model
+    </div>
+    <div class="select-container">
+      <label for="border-color-select" class="label">Border Color:</label>
+      <select id="border-color-select" (change)="onBorderColorChange($event)" class="form-select">
+        <option value="" disabled selected>Choose your border color</option>
+        <option value="transparent">Transparent</option>
+        <option value="white">White</option>
+        <option value="black">Black</option>
+      </select>
+      
+    </div>
+    <div *ngIf="messageErrorChoiceABorder"  class="form-text" style="all: unset; color: red; margin-top: 0; margin-bottom: 0.25rem; text-align: left;">
+        please choice a border color
+    </div>
+    <div class="message available-count" *ngIf="messageAvaibleQuantity">
+      {{ message }}
+    </div>
+    <div class="number-input-container">
+      <input type="number"  [formControl]="quantityControl" class="number-input" placeholder="1" />
+      <button 
+        type="button" 
+        (click)="saveOrderToLocalStorage()" 
+        class="customize-button" 
+        [disabled]="disabled" 
+        > Customize 
+      </button>
+
+
+    </div>
+  </div>
+
+  
+
+<app-whatsap></app-whatsap> 
+<app-footer></app-footer>

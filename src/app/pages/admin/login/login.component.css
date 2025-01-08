@@ -1,0 +1,11 @@
+:host{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+}
+
+.container{
+    max-width: 500px;
+    height: 300px;
+}

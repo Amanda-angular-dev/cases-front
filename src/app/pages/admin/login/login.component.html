@@ -1,0 +1,37 @@
+
+<div class="container">
+  <form [formGroup]="form" class="container-form">
+    <!-- input email adress-->
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">email</label>
+      <input type="text" class="form-control" formControlName="email" id="exampleFormControlInput1" placeholder="name@example.com">
+    
+    </div>
+    <!--end input email adress-->
+    <!-- input password-->
+    <div class="input-group mb-3">
+      <input type="{{ showPassword ? 'text' : 'password' }}"class="form-control" placeholder="password"aria-describedby="basic-addon2" formControlName="password" id="exampleFormControlInput2" >
+      <button class="input-group-text" id="basic-addon2" type="button" (click)="toggleShowPassword()">
+        {{ showPassword ? 'Ocultar' : 'Mostrar' }} contraseña
+      </button>
+    </div>
+    <!--end input password-->
+
+    <!-- check recordar-->
+    <div class="form-check">
+      <input class="form-check-input"formControlName="remember" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        recordar
+      </label>
+    </div>
+    <!-- fin check recordar-->
+    <br>
+    <!-- button of login-->
+    <div class="login-botones">
+      <button type="button" class="btn btn-primary" 
+        (click)="access()">loguin</button>
+    </div> 
+   
+     
+  </form>
+</div>

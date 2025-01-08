@@ -1,0 +1,275 @@
+
+:host{
+  display: flex;
+  justify-content: center;
+}
+.container {
+  text-align: center;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.columna-1-step-1{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+canvas {
+  border: 1px solid #ccc;
+  display: block;
+  margin: 0 auto;
+  background-color: #f8f8f8;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.upload-button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.upload-button input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.upload-button label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Espaciado entre el ícono y el texto */
+  background-color: #007bff; /* Color del botón */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer; /* El cursor tipo pointer */
+}
+
+.upload-button label:hover {
+  background-color: #0056b3; /* Color al pasar el mouse */
+}
+
+.upload-button label img {
+  width: 24px; /* Tamaño del ícono */
+  height: 24px;
+}
+
+.stepper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Altura completa para centrar verticalmente */
+}
+
+mat-horizontal-stepper {
+  width: 50%; /* Ajusta el ancho del Stepper */
+}
+
+mat-step {
+  text-align: center; /* Centra el contenido de cada paso */
+}
+
+button {
+  margin: 10px 0; /* Espaciado entre los botones */
+}
+
+.button-container,.button-container-step-2 {
+  display: flex;
+  justify-content:space-between; /* Alinea horizontalmente */
+  align-items: center; /* Alinea verticalmente */
+}
+.button-container-step-2{
+  width: 170px;
+}
+.styled-button {
+  background-color: #007bff; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none; /* Sin bordes */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Puntero tipo mano */
+  transition: background-color 0.3s ease; /* Animación suave */
+}
+
+.styled-button:hover {
+  background-color: #0056b3; /* Cambio de color al pasar el mouse */
+}
+
+.styled-button:active {
+  background-color: #003f7f; /* Cambio de color al hacer clic */
+}
+
+.upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Ajusta la altura según tu diseño */
+}
+
+.upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid rgba(200, 200, 200, 0.7);
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(200, 200, 200, 0.9);
+  background-color: transparent; /* Fondo transparente */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.upload-button:hover {
+  border-color: #fff;
+  color: #fff;
+  background-color: rgba(100, 100, 100, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  transform: scale(1.05); /* Efecto de agrandamiento */
+}
+
+.upload-button:active {
+  transform: scale(0.98); /* Efecto al hacer clic */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+#finalCanvas , #canvasTresFinal{
+  border-radius: 25px; /* Radio del borde */
+  overflow: hidden;    /* Asegura que el contenido no sobresalga */
+  border: 2px solid #000; /* Opcional: Borde visible */
+}
+
+.header {
+  text-align: center;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 13px;
+}
+
+.header h1 {
+  font-size: 1.2rem;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
+
+.order-summary {
+  text-align: center;
+  padding: 20px;
+}
+
+.order-table {
+  margin: 20px auto;
+  width: 80%;
+  border-collapse: collapse;
+}
+
+.order-table th, .order-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.order-table th {
+  background-color: #f4f4f4;
+}
+
+.thumbnail-image {
+  width: 50px;
+  height: auto;
+}
+
+.buy-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.buy-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.summaryorder{
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.redirecting{
+  width: 600px;
+  margin: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+h3 {
+  font-size: 18px;
+  font-family: 'Arial', sans-serif;
+  font-weight: normal;
+  color: #555;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+
+.styled-button {
+  background-color: #007bff; /* Color principal */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.styled-button-disabled {
+  background-color: #d3d3d3; /* Color para estado deshabilitado */
+  color: #808080; /* Texto gris */
+  cursor: not-allowed;
+}
+
+.styled-button-active {
+  background-color: #28a745; /* Color para estado activo */
+  transform: scale(1.05); /* Pequeño aumento para resaltar */
+}
+

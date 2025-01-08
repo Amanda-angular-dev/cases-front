@@ -1,0 +1,97 @@
+<h1 class="section-title">
+  <span *ngIf="type === '2d'">2D Phone Cases</span>
+  <span *ngIf="type === '3d'">3D Phone Cases</span>
+</h1>
+<div class="filter-container">
+  <label class="filter-label">Filter by Border Color:</label>
+  <div class="filter-options">
+    <label class="filter-option">
+      <input 
+        type="radio" 
+        name="borderColor" 
+        value="all" 
+        (change)="selectedColor = 'all'" 
+        checked>
+      All
+    </label>
+    <label class="filter-option">
+      <input 
+        type="radio" 
+        name="borderColor" 
+        value="black" 
+        (change)="selectedColor = 'black'">
+      Black
+    </label>
+    <label class="filter-option">
+      <input 
+        type="radio" 
+        name="borderColor" 
+        value="white" 
+        (change)="selectedColor = 'white'">
+      White
+    </label>
+    <label class="filter-option">
+      <input 
+        type="radio" 
+        name="borderColor" 
+        value="transparent" 
+        (change)="selectedColor = 'transparent'">
+      Transparent
+    </label>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h2 class="mb-4">Product Management</h2>
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">border color</th>
+        <th scope="col">dx</th>
+        <th scope="col">Quantities</th>
+        <th scope="col">Last Update</th>
+        <th scope="col">Details</th>
+        <th scope="col">Add New</th>
+        <th scope="col">Edit Quantities</th>
+ <!-- Nueva columna -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let caseItem of cases | filterBorderColor:selectedColor" >
+        <td>{{ caseItem.nombre }}</td>
+        <td>{{ caseItem.borderColor }}</td>
+        <td>{{ caseItem.dx }}</td>
+        <td>{{ caseItem.cantidad}}</td>
+        <td>{{ currentDate }}</td>
+        <td>
+          <button
+            class="btn btn-info btn-sm"
+            [routerLink]="['/admin/access-done/admin-stock/phonecases/ver-detalles', caseItem._id]"
+          >
+            View Details
+          </button>
+        </td>
+        <td>
+          <button
+          class="btn btn-success btn-sm"
+          [routerLink]="['/admin/access-done/admin-stock/phonecases/agregar-cantidad', caseItem._id, caseItem.nombre, caseItem.borderColor]"
+        >
+          Add
+        </button>
+        
+        </td>
+        <td>
+          <button
+            class="btn btn-warning btn-sm"
+            [routerLink]="['/admin/access-done/admin-stock/phonecases/edit-quantity', caseItem._id, caseItem.nombre, caseItem.cantidad, caseItem.borderColor]"
+          >
+            edit
+
+          </button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>

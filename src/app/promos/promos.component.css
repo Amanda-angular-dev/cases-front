@@ -1,0 +1,41 @@
+.promo-banner {
+    background-color: #ffefd5; /* Fondo suave y atractivo */
+    color: #333; /* Color de texto oscuro para contraste */
+    text-align: center; /* Centrar contenido */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    font-family: 'Arial', sans-serif;
+    margin: 20px auto;
+    max-width: 600px; /* Ancho máximo */
+  }
+
+  .promo-banner h2 {
+    color: #d9534f; /* Color llamativo para el título */
+    font-size: 2rem;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+
+  .promo-banner p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+
+  .promo-banner small {
+    font-size: 0.9rem;
+    color: #666; /* Texto aclaratorio en color más tenue */
+    display: block;
+    margin-top: 10px;
+  }
+  button{
+    margin-top: 10px;
+  }
+  @media (max-width: 500px) {
+   
+    .promo-banner{
+      
+        margin: 0;
+        
+    }
+  }

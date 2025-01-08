@@ -1,0 +1,9 @@
+.whatsap{
+    height: auto; /* Mantén las proporciones originales */
+    width: 50px; /* Ajusta solo el ancho */
+    display: block; /* Asegúrate de que sea visible */
+    position: fixed; /* Solo si realmente necesitas este posicionamiento */
+    bottom: 10px; /* Por ejemplo, para anclarla en la pantalla */
+    right: 10px;
+    z-index: 40;
+}

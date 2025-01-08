@@ -1,0 +1,18 @@
+
+ <div  class="menu"  
+ [ngClass]="isCollapsed ? 'show' : 'hide'">
+    <div class="card" *ngIf="avoitLookMenuToStart">
+        <div class="card-body" (click)="cerrarMenu()" routerLink="/home" >
+            Home
+        </div>
+        <!--<div class="card-body" (click)="cerrarMenu()" routerLink="/mi-cuenta">
+            My Account
+        </div> -->
+        <div class="card-body" (click)="cerrarMenu()" routerLink="/create">
+            Create
+        </div>
+        <div class="card-body" routerLink="/contact" (click)="cerrarMenu()">
+           Contact
+        </div>
+    </div>
+</div>

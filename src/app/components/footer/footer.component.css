@@ -1,0 +1,12 @@
+:host {
+    height: 50px; /* Altura del footer */
+    background-color: #0033a0;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto; /* Empuja el contenido hacia arriba */
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }

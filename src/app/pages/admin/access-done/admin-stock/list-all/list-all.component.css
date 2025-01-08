@@ -1,0 +1,64 @@
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .section-title span {
+    color: #ff5722; /* Un color llamativo, como naranja */
+    text-shadow: 0 0 8px rgba(255, 87, 34, 0.8); /* Brillo elegante */
+  }
+  
+  .filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+  }
+  
+  .filter-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .filter-options {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .filter-option {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .filter-option input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    outline: none;
+    margin-right: 5px;
+    transition: all 0.2s ease;
+  }
+  
+  .filter-option input[type="radio"]:checked {
+    background-color: #007bff; /* Color azul bootstrap */
+    border-color: #007bff;
+  }
+  
+  .filter-option:hover input[type="radio"] {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  .filter-option:hover {
+    color: #007bff;
+  }
+  

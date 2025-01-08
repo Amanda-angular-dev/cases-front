@@ -1,0 +1,53 @@
+
+.contenedor-header{
+    display: flex;
+    height: 109px;
+    padding-top: 30px;
+    position: relative;
+    z-index: 3;
+    background-color: #2168e9;
+}
+.elementos-costados{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.elemento-central{
+    flex:3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.elemento-central img{
+    width: 18%;
+}
+button {
+    border: none; /* Sin borde para un aspecto limpio */
+    background-color: transparent; /* Fondo transparente */
+    padding: 0.5rem; /* Espaciado interno */
+    display: flex; /* Alineación del contenido */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  svg {
+    width: 24px; /* Tamaño del ícono */
+    height: 24px;
+    fill: currentColor; /* Hereda el color del texto */
+  }
+  
+  button:focus {
+    outline: none; /* Sin borde de enfoque */
+  }
+  
+  button:hover {
+    color: #d0d0ce; /* Cambia de color al pasar el cursor */
+  }
+ 
+  @media (max-width: 820px) {
+    .elemento-central img{
+       width: 38%;
+    }
+  }

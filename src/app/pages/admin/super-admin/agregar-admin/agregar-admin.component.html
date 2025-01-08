@@ -1,0 +1,35 @@
+
+<div class="container">
+    <h2>Register Admin</h2>
+    <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" class="form-control" formControlName="name" />
+        <div *ngIf="adminForm.get('name')?.invalid && adminForm.get('name')?.touched" class="error">
+          Name is required and must be at least 3 characters long.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" class="form-control" formControlName="email" />
+        <div *ngIf="adminForm.get('email')?.invalid && adminForm.get('email')?.touched" class="error">
+          Please enter a valid email.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" class="form-control" formControlName="password" />
+        <div *ngIf="adminForm.get('password')?.invalid && adminForm.get('password')?.touched" class="error">
+          Password is required and must be at least 6 characters long.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="adminForm.invalid">Register</button>
+    </form>
+  
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  </div>
+  

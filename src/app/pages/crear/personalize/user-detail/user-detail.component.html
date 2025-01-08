@@ -1,0 +1,28 @@
+
+<form [formGroup]="userFormGroup" class="container-form">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter your name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter your email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" placeholder="Enter your phone number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input matInput formControlName="address" placeholder="Enter your address">
+    </mat-form-field>
+  </form>
+  <div class="button-container-step-2">
+    <button mat-button matStepperPrevious class="styled-button">Back</button>
+    <button mat-button matStepperNext [disabled]="!userFormGroup.valid"
+    [ngClass]="{'styled-button': true, 'styled-button-disabled': !userFormGroup.valid, 'styled-button-active': userFormGroup.valid}"
+    class="styled-button"(click)="onNext()" >Next</button>
+  </div>

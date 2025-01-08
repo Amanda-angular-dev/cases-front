@@ -1,0 +1,157 @@
+
+<mat-horizontal-stepper labelPosition="bottom" #stepper>
+  <!-- Paso 1: Subir imagen -->
+  <mat-step [stepControl]="firstFormGroup">
+    <ng-template matStepLabel>Add image</ng-template>
+    <div class="container">
+      <div class="columna-1-step-1">
+        <div class="upload-button">
+          <div class="header">
+            <h1>Add Image</h1>
+          </div>
+          <input type="file" id="upload" />
+          <label for="file-upload">
+            <span>Upload Image</span>
+          </label>
+          <img src="./assets/upload.png" alt="Upload Icon" />
+        </div>
+
+        <div>
+          <div style="text-align: center; margin-bottom: 10px;">
+            <h3 style="font-family: Arial, sans-serif; font-weight: normal; color: #555;">Rotate Cellphone</h3>
+          </div>
+          <button (click)="alignPhoneTemplate('vertical')" title="Alinear vertical">
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+              <path d="M12 2v20m0-20L6 8m6-6l6 6" stroke="black" stroke-width="2" fill="none" />
+            </svg>
+          </button>
+          <button (click)="alignPhoneTemplate('horizontal')" title="Alinear horizontal">
+            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+              <path d="M22 12H2m20 0l-6-6m6 6l-6 6" stroke="black" stroke-width="2" fill="none" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <canvas id="canvas"></canvas>
+
+      <div class="button-container">
+        <button mat-button matStepperNext
+         (click)="moveImageToFinalCanvas()" 
+          
+          class="styled-button"
+          >Next</button>
+      </div>
+    </div>
+  </mat-step>
+
+  <!-- Paso 2: Ver cómo se verá -->
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>See how it would look</ng-template>
+    <div class="container">
+      <div>
+        <h6>Step 2: Final image on the cell phone</h6>
+        <canvas id="finalCanvas" width="400" height="400"></canvas>
+      </div>
+
+      <div class="button-container-step-2">
+        <button mat-button matStepperPrevious class="styled-button">Back</button>
+        <button mat-button matStepperNext (click)="loadToCanvasTresFinal()" class="styled-button">Next</button>
+      </div>
+    </div>
+  </mat-step>
+
+  <!-- Paso 3: Cargar datos del usuario -->
+  <mat-step>
+    <ng-template matStepLabel>Enter user details</ng-template>
+    <div >
+      <h2>User Information</h2>
+      
+      <app-user-detail (formSubmitted)="handleFormSubmitted($event)"></app-user-detail>
+      
+    </div>
+   
+  </mat-step>
+
+  <!-- Paso 4: Ordenar y comprar -->
+  <mat-step>
+    <ng-template matStepLabel>Order and buy</ng-template>
+    <p>You are now done.</p>
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div class="summaryorder">
+        <canvas *ngIf="currentOrientation === 'vertical'" id="canvasTresFinal" width="150" height="200"></canvas>
+        <canvas *ngIf="currentOrientation === 'horizontal'" id="canvasTresFinal" width="150" height="100"></canvas>
+        <div>
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>Phone Name</th>
+                <th>Quantity</th>
+                <th>Border Color</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ order.namePhone }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.borderColor }}</td>
+                <td>{{order.quantity * order.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th colspan="2">Send to...</th> <!-- Colspan 2 para que ocupe ambas columnas -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>{{  user?.name }}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{{ user?.email }}</td>
+              </tr>
+              <tr>
+                <td>Teléfono</td>
+                <td>{{ user?.phone }}</td>
+              </tr>
+              <tr>
+                <td>Address</td>
+                <td>{{ user?.address}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+
+      <button *ngIf="!redirecting" class="buy-button" (click)="pay()" [disabled]="!order">
+        Buy
+      </button>
+      <img *ngIf="redirecting" src="/assets/redirecting.gif" class="redirecting" alt="">
+    </div>
+
+    <div class="button-container-step-2">
+      <button mat-button matStepperPrevious class="styled-button">Back</button>
+      <button mat-button (click)="stepper.reset()" class="styled-button">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+
+  
+
+
+
+
+
+
+
+
+
+ 

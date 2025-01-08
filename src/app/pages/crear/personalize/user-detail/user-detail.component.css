@@ -1,0 +1,28 @@
+.container-form{
+    display: flex;
+    flex-direction: column;
+  }
+  .styled-button {
+    background-color: #007bff; /* Color principal */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .styled-button-disabled {
+    background-color: #d3d3d3; /* Color para estado deshabilitado */
+    color: #808080; /* Texto gris */
+    cursor: not-allowed;
+  }
+  
+  .styled-button-active {
+    background-color: #28a745; /* Color para estado activo */
+    transform: scale(1.05); /* Pequeño aumento para resaltar */
+  }
+  button {
+    margin: 10px 0; /* Espaciado entre los botones */
+  }
+  

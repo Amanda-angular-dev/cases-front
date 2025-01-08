@@ -1,0 +1,44 @@
+
+
+  
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a  routerLink="/admin/access-done" 
+        routerLinkActive="active">access-done</a></li>
+      <li class="breadcrumb-item"><a routerLink="/admin/access-done/admin-stock" 
+        routerLinkActive="active" >admin-stock</a></li>
+      <li class="breadcrumb-item " aria-current="page">add</li>
+    </ol>
+  </nav>
+
+  <div class="container">
+    <h2>Actualizar Cantidad</h2>
+  
+    <!-- Formulario para actualizar cantidad -->
+    <form [formGroup]="updateQuantityForm" (ngSubmit)="addQuantity()">
+      <label for="nombreCaso">Nombre del caso:</label>
+      <input id="nombreCaso" type="text" [value]="nombreCaso" readonly class="readonly-input" />
+  
+      <label for="cantidad">Cantidad a agregar:</label>
+      <input
+        id="cantidad"
+        formControlName="cantidad"
+        type="number"
+        placeholder="Cantidad"
+        class="form-input"
+      />
+  
+      <!-- Mensajes de error -->
+      <div
+        *ngIf="updateQuantityForm.get('cantidad')?.invalid && updateQuantityForm.get('cantidad')?.touched"
+        class="error-message"
+      >
+        <small>La cantidad debe ser mayor a 0.</small>
+      </div>
+  
+      <button type="submit" [disabled]="updateQuantityForm.invalid" class="submit-btn">
+        Agregar Cantidad
+      </button>
+    </form>
+  </div>
+  
