@@ -18,8 +18,9 @@ export class WorkOrderService {
   }
 
    // Agregar un nuevo caso
-   addOrder(): Observable<any> {
-    const payload = this.createRequestPayload()
+   addOrder(user,email,phone,address,imagenLienzoFinal, originalImageFile): Observable<any> {
+    const payload = this.createRequestPayload(user,email,phone,address,imagenLienzoFinal, originalImageFile)
+    console.log(payload)
     return this.http.post(`${environment.url_endpoint}/order/`,payload);
        
   }
@@ -39,26 +40,46 @@ export class WorkOrderService {
 
   }
 
-  createRequestPayload(){
-    // Obtener la imagen generada en el canvas final como base64
-    // const finalCanvasImage = this.finalCanvas.toDataURL();
-    this.loadOrder()
-    // Crear el objeto con los datos de la orden, el formulario, y las imágenes
-    const payload = {
-     productName :this.order.namePhone,
-     roductPrice : this.order.price, // Precio en centavos
-     productQuantity : this.order.quantity,
-     productBorderColor : this.order.borderColor, // Color del borde
-     userName: 'this.userFormGroup.value',
-     userEmail: 'this.userFormGroup.value',
-     userPhone: 'this.userFormGroup.value',
-     userAddress: 'this.userFormGroup.value',
-     //  finalCanvasImage: finalCanvasImage, // Imagen del lienzo final
-     //  rawUploadedImage: this.uploadedRawImage, // Imagen en bruto cargada por el usuario
-    };
+  createRequestPayload(user,email,phone,address,imagenLienzoFinal, originalImageFile){
+    console.log('user:', user);
+    console.log('email:', email);
+    console.log('phone:', phone);
+    console.log('address:', address);
+    console.log('dataURL:', imagenLienzoFinal);
+     this.loadOrder()
+      // Convertir la imagen Base64 a un archivo tipo Blob
+      const blob = this.dataURLtoBlob(imagenLienzoFinal);
+      const blob2 = this.dataURLtoBlob(originalImageFile);
+      //const blob3 = this.dataURLtoBlob(dataURL3);
+      // Crear el FormData para enviar al servidor
+      const formData = new FormData();
+      formData.append('image', blob, 'canvas-image.png'); // Agregar la imagen
+      formData.append('originalImage',blob2 , 'canvas-image.png'); // Imagen original
+      //formData.append('tercerImage',blob3 , 'canvas-image.png'); 
+      formData.append('productName', this.order.namePhone);
+      formData.append('productPrice', this.order.price.toString()); // Convertir a string para FormData
+      formData.append('productQuantity', this.order.quantity.toString());
+      formData.append('productBorderColor', this.order.borderColor);
+      formData.append('dx', this.order.dx);
+      formData.append('userName', user);
+      formData.append('userEmail', email);
+      formData.append('userPhone', phone);
+      formData.append('userAddress', address);
 
-    console.log('Payload enviado:', payload);
+     
 
-    return payload;
+      return formData; // Devuelve el FormData listo para enviar
  }
+
+ private dataURLtoBlob(dataURL: string): Blob {
+  const byteString = atob(dataURL.split(',')[1]);
+  const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([ab], { type: mimeString });
+}
+
 }

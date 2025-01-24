@@ -130,7 +130,7 @@
         
       </div>
 
-      <button *ngIf="!redirecting" class="buy-button" (click)="pay()" [disabled]="!order">
+      <button *ngIf="!redirecting" class="buy-button" (click)=" pay()"  [disabled]="!order">
         Buy
       </button>
       <img *ngIf="redirecting" src="/assets/redirecting.gif" class="redirecting" alt="">

@@ -1,0 +1,48 @@
+
+<div class="order-container">
+    <!-- Imagen a la izquierda -->
+    <div class="order-image">
+      <img 
+      [src]="order.finalCanvasImage"  
+        alt="Imagen del producto" 
+      />
+      <!-- Botón para descargar la imagen -->
+      
+      <a 
+      [href]="urlWeb + '/download?imageUrl=' + order.finalCanvasImage" 
+      download="imagen-del-producto.jpg" 
+      class="btn-download">
+         Download
+      </a>
+      <img 
+      [src]="order.originalImage"  
+        alt="Imagen del producto" 
+      />
+      <!-- Botón para descargar la imagen -->
+      
+      <a 
+      [href]="urlWeb + '/download?imageUrl=' + order.originalImage" 
+      download="imagen-del-producto.jpg" 
+      class="btn-download">
+         Download
+      </a>
+    </div>
+  
+    <!-- Lista de datos a la derecha -->
+    <div class="order-details">
+      <ul>
+        <li><strong>Producto:</strong> {{ order.productName }}</li>
+        <li><strong>Precio:</strong> {{ order.productPrice | currency:'USD' }}</li>
+        <li><strong>Cantidad:</strong> {{ order.productQuantity }}</li>
+        <li><strong>Color:</strong> {{ order.productBorderColor }}</li>
+        <li><strong>DX:</strong> {{ order.dx }}</li>
+        <li><strong>Cliente:</strong> {{ order.userName }}</li>
+        <li><strong>Email:</strong> {{ order.userEmail }}</li>
+        <li><strong>Teléfono:</strong> {{ order.userPhone }}</li>
+        <li><strong>Dirección:</strong> {{ order.userAddress }}</li>
+        <li><strong>Estado:</strong> {{ order.state }}</li>
+        <li><strong>Fecha de Creación:</strong> {{ order.createdAt | date:'short' }}</li>
+      </ul>
+    </div>
+  </div>
+  

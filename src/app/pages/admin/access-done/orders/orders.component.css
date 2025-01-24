@@ -1,0 +1,39 @@
+
+  .button-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+  
+  .styled-button {
+    background-color: black;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  
+  
+  .styled-button {
+    background-color: black;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: box-shadow 0.3s ease, opacity 0.3s ease;
+    opacity: 0.8; /* Botón no activo */
+  }
+  
+  .styled-button:hover {
+    opacity: 1; /* Más visible al pasar el cursor */
+  }
+  
+  .active-button {
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8); /* Brillo sutil */
+    opacity: 1; /* Botón activo */
+  }

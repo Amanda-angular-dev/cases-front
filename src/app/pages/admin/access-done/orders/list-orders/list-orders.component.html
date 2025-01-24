@@ -1,0 +1,34 @@
+
+<table>
+    <thead>
+      <tr>
+        <th>Name/Phone</th>
+        <th>Quantity</th>
+        
+        <th>Price</th>
+      
+        
+        <th>Status</th>
+        <th>details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.productName }}</td>
+        <td>{{ order.productQuantity }}</td>
+        
+        <td>{{ order.productPrice | currency }}</td>
+        
+        <td >{{ order.status }}</td>
+        <td>
+          <button
+            class="btn btn-info btn-sm"
+            [routerLink]="['/admin/access-done/orders/order-details/',order._id]"
+          >
+            View Details
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

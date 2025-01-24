@@ -33,6 +33,7 @@ import { CancelComponent } from './pages/payment/cancel/cancel.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UserDetailComponent } from './pages/crear/personalize/user-detail/user-detail.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { UserDetailComponent } from './pages/crear/personalize/user-detail/user-
     PersonalizeButtonCaseComponent,
     SuccessComponent,
     CancelComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,

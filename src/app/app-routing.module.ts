@@ -10,10 +10,12 @@ import { CuentaComponent } from './pages/cuenta/cuenta.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CancelComponent } from './pages/payment/cancel/cancel.component';
 import { SuccessComponent } from './pages/payment/success/success.component';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 
 const routes: Routes = [
   { path:'contact',component:ContactComponent},
+  { path: 'server-error', component: ServerErrorComponent },
   {path:'home',component:HomeComponent},
   {path:'mi-cuenta',component:CuentaComponent},
   {path:'create',component:CrearComponent,

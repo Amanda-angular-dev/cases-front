@@ -1,0 +1,12 @@
+<div class="button-container">
+  <button class="styled-button">
+    <a routerLink="/admin/access-done/orders/list-orders/pagada" class="button-link" routerLinkActive="active-button" [routerLinkActiveOptions]="{ exact: true }">pagadas</a>
+  </button>
+  <button class="styled-button">
+    <a routerLink="/admin/access-done/orders/list-orders/realizada" class="button-link" routerLinkActive="active-button" [routerLinkActiveOptions]="{ exact: true }">realizadas</a>
+  </button>
+  <button class="styled-button">
+    <a routerLink="/admin/access-done/orders/list-orders/entregada" class="button-link" routerLinkActive="active-button" [routerLinkActiveOptions]="{ exact: true }">entregadas</a>
+  </button>
+</div>
+  <router-outlet></router-outlet>

@@ -1,0 +1,72 @@
+/* General table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  /* Header styles */
+  thead tr {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+  }
+  
+  thead th {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Body styles */
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:hover {
+    background-color: #ddd;
+  }
+  
+  tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Image styles */
+  td img {
+    border-radius: 5px;
+    max-height: 50px;
+    max-width: 50px;
+  }
+  
+  /* State styles */
+  td.pending {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  td.confirmed {
+    color:black;
+    font-weight: bold;
+  }
+  
+  td.canceled {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Responsive table styles */
+  @media screen and (max-width: 768px) {
+    table {
+      font-size: 14px;
+    }
+  
+    thead tr {
+      font-size: 14px;
+    }
+  
+    tbody td {
+      font-size: 12px;
+    }
+  }

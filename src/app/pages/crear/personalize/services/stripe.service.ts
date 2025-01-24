@@ -19,13 +19,21 @@ export class StripeService {
     productName: string,
     productPrice: number,
     productQuantity: number,
-    borderColor: string
+    productBorderColor: string,
+    
+    dx: string,
+    id: string,
+    imagen: string
   ): Observable<{ id: string }> {
     const body = {
-      name: productName,
-      price: productPrice,
-      quantity: productQuantity,
-      borderColor: borderColor,
+       productName,
+      productPrice,
+      productQuantity,
+      productBorderColor,
+      dx,
+      id,
+
+      imagen
     };
 
     return this.http.post<{ id: string }>(
@@ -49,25 +57,5 @@ export class StripeService {
     );
   }
 
-  // Subir imagen al backend
-  uploadImage(imageBase64: string): Promise<string> {
-    const formData = new FormData();
-    formData.append('image', imageBase64);
-
-    return new Promise((resolve, reject) => {
-      this.http.post<{ imageUrl: string }>(
-        `${environment.url_endpoint}/upload`,
-        formData
-      ).subscribe(
-        (response) => {
-          if (response.imageUrl) {
-            resolve(response.imageUrl);
-          } else {
-            reject('No se pudo obtener la URL de la imagen');
-          }
-        },
-        (error) => reject(error)
-      );
-    });
-  }
+  
 }

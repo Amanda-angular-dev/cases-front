@@ -19,6 +19,9 @@ import { HeaderComponent } from './access-done/header/header.component';
 
 import { PhonecasesComponent } from './access-done/admin-stock/phonecases/phonecases.component';
 import { FilterBorderColorPipe } from './pipes/filter-border-color.pipe';
+import { OrdersComponent } from './access-done/orders/orders.component';
+import { ListOrdersComponent } from './access-done/orders/list-orders/list-orders.component';
+import { OrderDetailsComponent } from './access-done/orders/order-details/order-details.component';
 
 
 
@@ -33,7 +36,7 @@ import { FilterBorderColorPipe } from './pipes/filter-border-color.pipe';
        ListAllComponent,
         SuperAdminComponent, 
         AgregarAdminComponent, 
-        EditCantidadesComponent, HeaderComponent, PhonecasesComponent, FilterBorderColorPipe],
+        EditCantidadesComponent, HeaderComponent, PhonecasesComponent, FilterBorderColorPipe, OrdersComponent, ListOrdersComponent, OrderDetailsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

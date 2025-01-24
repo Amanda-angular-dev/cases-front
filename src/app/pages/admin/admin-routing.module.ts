@@ -8,6 +8,9 @@ import { ListAllComponent } from './access-done/admin-stock/list-all/list-all.co
 import { PhonecasesComponent } from './access-done/admin-stock/phonecases/phonecases.component';
 
 import { VerDetallesComponent } from './access-done/admin-stock/ver-detalles/ver-detalles.component';
+import { ListOrdersComponent } from './access-done/orders/list-orders/list-orders.component';
+import { OrderDetailsComponent } from './access-done/orders/order-details/order-details.component';
+import { OrdersComponent } from './access-done/orders/orders.component';
 
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -30,10 +33,20 @@ const routes: Routes = [
                 { path:'phonecases/:type', component: ListAllComponent },
                 { path:'phonecases/agregar-cantidad/:id/:nombre/:borderColor', component: AgregarCantidadComponent },
                 { path:'phonecases/edit-quantity/:id/:nombre/:cantidad/:borderColor', component: EditCantidadesComponent },
-                { path:'phonecases/ver-detalles/:itemId', component: VerDetallesComponent },
-                
-              ]}
-          ] },
+                { path:'phonecases/ver-detalles/:itemId', component: VerDetallesComponent }, 
+              ]
+          }
+         ]
+        },
+        { path: 'orders', component: OrdersComponent,
+        children: [
+          
+          { path: '', redirectTo: 'list-orders/:state', pathMatch: 'full' }, // Redirección
+          { path: 'list-orders/:state', component:ListOrdersComponent },
+          { path: 'order-details/:itemId', component:OrderDetailsComponent },  
+          
+
+          ] }, 
         { path: '', redirectTo: 'details', pathMatch: 'full' } // Redirección por defecto en access-done
       ]
       

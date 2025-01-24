@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { fabric } from 'fabric';
 import { StripeService } from 'src/app/pages/crear/personalize/services/stripe.service';
 import { Order } from 'src/app/pages/crear/personalize/interfaces/order';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WorkOrderService } from 'src/app/pages/crear/personalize/services/work-order.service';
 import { Payload, UserDetails } from 'src/app/pages/crear/personalize/interfaces/payload';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-personalize',
@@ -14,6 +15,11 @@ import { Payload, UserDetails } from 'src/app/pages/crear/personalize/interfaces
 export class PersonalizeComponent implements AfterViewInit {
   canvas!: fabric.Canvas;
   finalCanvas!: fabric.Canvas; // Canvas para el segundo paso
+  
+  
+  dataURL2
+
+  croppedImageclonado
   isImageUploaded: boolean = false;
   firstFormGroup: any;
   secondFormGroup: any;
@@ -23,11 +29,16 @@ export class PersonalizeComponent implements AfterViewInit {
   redirecting = false
   currentOrientation: 'horizontal' | 'vertical' = 'vertical';
   user:UserDetails
-  uploadedRawImage: string = ''; // Imagen en bruto cargada por el usuario
+  croppedImage
+  savedImage
+  imageWithoutPhone
+  imageWithPhone
 
-  constructor(private ngZone: NgZone, 
+  constructor(//private ngZone: NgZone, 
               private stripeService: StripeService,
-              private workOrderService: WorkOrderService) { }
+              private workOrderService: WorkOrderService,
+              private router: Router,
+              private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.loadOrder();
@@ -48,14 +59,14 @@ export class PersonalizeComponent implements AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    this.ngZone.runOutsideAngular(() => {
+    //this.ngZone.runOutsideAngular(() => {
       this.initializeCanvas();
       this.loadPhoneTemplate();
 
       // Configurar el input para subir imágenes
       const uploadInput = document.getElementById('upload') as HTMLInputElement;
       uploadInput.addEventListener('change', (event) => this.uploadImage(event));
-    });
+    //});
   }
 
   initializeCanvas(): void {
@@ -66,13 +77,16 @@ export class PersonalizeComponent implements AfterViewInit {
       selection: true,
     });
 
+  
+
     // Lienzo final
     this.finalCanvas = new fabric.Canvas('finalCanvas', {
       width: 152,
       height: 300,
       selection: false,
     });
-
+   
+    
 
   }
 
@@ -94,6 +108,8 @@ export class PersonalizeComponent implements AfterViewInit {
         evented: false,
       });
 
+    // Asignar una propiedad personalizada para identificar que esta es la plantilla del celular
+    img.set({ name: 'phoneImage' });
       // Marcar la imagen como plantilla del celular
       (img as any).isPhoneTemplate = true;
 
@@ -102,11 +118,13 @@ export class PersonalizeComponent implements AfterViewInit {
       this.canvas.bringToFront(img);
       this.canvas.preserveObjectStacking = true;
       this.canvas.renderAll();
+
+      
     });
   }
 
   uploadImage(event: Event): void {
-    this.ngZone.runOutsideAngular(() => {
+   // this.ngZone.runOutsideAngular(() => {
       const input = event.target as HTMLInputElement;
       if (input.files && input.files[0]) {
         const reader = new FileReader();
@@ -114,8 +132,7 @@ export class PersonalizeComponent implements AfterViewInit {
           const userImage = new Image();
           userImage.src = e.target?.result as string;
 
-          // Guardar la imagen en bruto
-          this.uploadedRawImage = userImage.src;
+          
 
           userImage.onload = () => {
             const img = new fabric.Image(userImage);
@@ -140,13 +157,14 @@ export class PersonalizeComponent implements AfterViewInit {
             this.canvas.add(img);
             this.canvas.sendToBack(img);
             this.canvas.renderAll();
-
+            
+            
              
           };
         };
         reader.readAsDataURL(input.files[0]);
       }
-    });
+   // });
   }
   
   
@@ -171,8 +189,10 @@ export class PersonalizeComponent implements AfterViewInit {
         });
   
         this.canvas.clipPath = clipRect;
-        this.canvas.renderAll();
-  
+      
+        
+        
+
         const croppedImageDataURL = this.canvas.toDataURL({
           format: 'png',
           left: clipRect.left,
@@ -180,7 +200,8 @@ export class PersonalizeComponent implements AfterViewInit {
           width: clipRect.width,
           height: clipRect.height,
         });
-  
+        // Guardar la imagen recortada en una propiedad del componente
+        this.croppedImage = croppedImageDataURL;
         fabric.Image.fromURL(croppedImageDataURL, (img) => {
           img.set({
             left: 0,
@@ -188,12 +209,24 @@ export class PersonalizeComponent implements AfterViewInit {
             selectable: false,
             evented: false,
           });
-  
+       
           this.finalCanvas.add(img);
+         
+          
           this.finalCanvas.renderAll();
-  
-          this.canvas.clipPath = null;
-          this.canvas.renderAll();
+          
+          
+          this.dataURL2 = this.finalCanvas.toDataURL({
+            format: 'png', // También puede ser 'jpeg'
+            quality: 1,   // Calidad de la imagen (1 = máxima)
+          }); 
+         
+          
+          // Restaurar el estado del lienzo original
+      this.canvas.clipPath = null;
+   
+      this.canvas.renderAll();
+          
         });
       
     } else {
@@ -210,7 +243,9 @@ export class PersonalizeComponent implements AfterViewInit {
         });
   
         this.canvas.clipPath = clipRect;
-        this.canvas.renderAll();
+
+        
+        //this.canvas.renderAll();
   
         const croppedImageDataURL = this.canvas.toDataURL({
           format: 'png',
@@ -219,7 +254,8 @@ export class PersonalizeComponent implements AfterViewInit {
           width: clipRect.width,
           height: clipRect.height,
         });
-  
+        // Guardar la imagen recortada en una propiedad del componente
+        this.croppedImage = croppedImageDataURL;
         fabric.Image.fromURL(croppedImageDataURL, (img) => {
           img.set({
             left: 0,
@@ -227,12 +263,24 @@ export class PersonalizeComponent implements AfterViewInit {
             selectable: false,
             evented: false,
           });
+          
   
           this.finalCanvas.add(img);
           this.finalCanvas.renderAll();
-  
-          this.canvas.clipPath = null;
-          this.canvas.renderAll();
+         
+          
+          
+          this.dataURL2 = this.finalCanvas.toDataURL({
+            format: 'png', // También puede ser 'jpeg'
+            quality: 1,   // Calidad de la imagen (1 = máxima)
+          }); 
+         
+          
+          // Restaurar el estado del lienzo original
+      this.canvas.clipPath = null;
+      
+        
+      this.canvas.renderAll();
         });
       
     }
@@ -242,7 +290,7 @@ export class PersonalizeComponent implements AfterViewInit {
 
 
   removeUserUploadedImages(): void {
-    this.ngZone.runOutsideAngular(() => {
+  //  this.ngZone.runOutsideAngular(() => {
       const objectsToRemove = this.canvas.getObjects('image').filter((obj) => {
         return !(obj as any).isPhoneTemplate;
       });
@@ -252,11 +300,53 @@ export class PersonalizeComponent implements AfterViewInit {
       });
 
       this.canvas.renderAll();
-    });
+   // });
   }
 
+  generateImages() {
+    // Verifica que el canvas exista
+    if (!this.canvas) {
+      console.error('Canvas no está inicializado.');
+      return;
+    }
   
-
+    // Función para generar un DataURL sin modificar el estado original
+    const generateImage = (showPhone: boolean): string => {
+      // Clona el canvas para evitar modificar el original
+      const tempCanvas = new fabric.Canvas(null);
+      tempCanvas.loadFromJSON(this.canvas.toJSON(), () => {
+        const phoneImage = tempCanvas.getObjects('image').find(img => img.name === 'phoneImage');
+  
+        // Configura la visibilidad del celular según el parámetro
+        if (phoneImage) {
+          phoneImage.set('visible', showPhone);
+        }
+  
+        tempCanvas.renderAll(); // Renderiza la imagen ajustada
+      });
+  
+      // Genera el dataURL
+      const dataURL = tempCanvas.toDataURL({
+        format: 'png',
+        quality: 1,
+      });
+  
+      return dataURL;
+    };
+  
+    // Generar ambas imágenes
+    const imageWithoutPhone = generateImage(false); // Sin celular
+    const imageWithPhone = generateImage(true);    // Con celular
+  
+    // Guardar o utilizar las imágenes según sea necesario
+    console.log('Imagen sin celular:', imageWithoutPhone);
+    console.log('Imagen con celular:', imageWithPhone);
+  
+    // Si necesitas almacenar los resultados
+    this.imageWithoutPhone = imageWithoutPhone;
+    this.imageWithPhone = imageWithPhone;
+  }
+  
   loadToCanvasTresFinal() {
     const sourceCanvas = document.getElementById('finalCanvas') as HTMLCanvasElement;
     const targetCanvas = document.getElementById('canvasTresFinal') as HTMLCanvasElement;
@@ -283,7 +373,7 @@ alignPhoneTemplate(orientation: 'horizontal' | 'vertical'): void {
     return;
   }
 
-  this.ngZone.runOutsideAngular(() => {
+ // this.ngZone.runOutsideAngular(() => {
     phoneTemplate.set({
       angle: 0, // Reiniciar ángulo
       left: 0,
@@ -302,7 +392,7 @@ alignPhoneTemplate(orientation: 'horizontal' | 'vertical'): void {
 
     // Guardar la orientación actual
     this.currentOrientation = orientation;
-  });
+ // });
 }
 
   
@@ -328,17 +418,58 @@ alignPhoneTemplate(orientation: 'horizontal' | 'vertical'): void {
     return this.canvas.getObjects('image').length > 0;
   }
   async pay() {
-    this.redirecting = true;
+    
+    // Cambiar el estado para mostrar el GIF de redirección
+    this.redirecting =true
+  
     try {
+       // Verifica que el canvas exista y sea válido
+
+// Verifica que el canvas exista y sea válido
+if (!this.canvas || typeof this.canvas.getObjects !== 'function') {
+  console.error('Canvas no está inicializado o no es válido');
+  return;
+}
+
+// Obtén los objetos en el canvas
+const imagesOnCanvas = this.canvas.getObjects('image');
+const phoneImage = imagesOnCanvas.find(img => img.name === 'phoneImage');
+
+
+  // Oculta temporalmente el teléfono
+  phoneImage.set('visible', false);
+  this.canvas.renderAll(); // Actualiza el canvas
+
+  // Genera el dataURL sin incluir el teléfono
+  const dataURL = this.canvas.toDataURL({
+    format: 'png', // Puede ser 'jpeg' si prefieres otro formato
+    quality: 1,    // Calidad máxima
+  });
+
+  // Restaura la visibilidad del teléfono
+  phoneImage.set('visible', true);
+  this.canvas.renderAll(); // Actualiza el canvas nuevamente
+
+  console.log('Imagen generada sin el teléfono:', dataURL);
+
+
+
+
+      
+     
       // Enviar la orden al backend
-      this.workOrderService.addOrder().subscribe({
+      this.workOrderService.addOrder(this.user.name,this.user.email,this.user.phone,this.user.address,this.croppedImage,dataURL).subscribe({
         next: (response) => {
+          // Clonar el lienzo original
+          
+
+          
           console.log('Orden enviada exitosamente:', response);
-          this.initiateStripePayment();
+          this.initiateStripePayment(response.id,response.imagen);
         },
         error: (error) => {
           console.error('Error al enviar la orden:', error);
-          
+          this.router.navigate(['/server-error']);
         },
         complete: () => console.log('Solicitud completada.'),
       });
@@ -348,23 +479,27 @@ alignPhoneTemplate(orientation: 'horizontal' | 'vertical'): void {
       
     } catch (error) {
       console.error('Error en el proceso de pago:', error);
+      this.router.navigate(['/server-error']);
       
     } finally {
-      this.redirecting = false; // Restaurar estado
+       // Restaurar estado// Restaurar estado
     }
   }
-  
+  showRedirecting(){
+    this.redirecting = true;
+    this.cdr.detectChanges();
+  }
 
   
-  initiateStripePayment() {
+  initiateStripePayment(id,imagen) {
     const productName = this.order.namePhone;
     const productPrice = this.order.price; // Precio en centavos
     const productQuantity = this.order.quantity;
-    const borderColor = ''; // Color del borde
-    const imageBase64 = this.finalCanvas.toDataURL();
+    const borderColor = this.order.borderColor; // Color del borde
+    const dx = this.order.dx;
   
     this.stripeService
-      .createCheckoutSession(productName, productPrice, productQuantity, borderColor)
+      .createCheckoutSession(productName, productPrice, productQuantity, borderColor,dx,id,imagen)
       .subscribe({
         next: (response) => {
           console.log('Sesión creada:', response);
@@ -375,6 +510,11 @@ alignPhoneTemplate(orientation: 'horizontal' | 'vertical'): void {
         },
         error: (err) => console.error('Error al crear la sesión:', err),
       });
+  }
+  private restoreCanvasState(phoneImage: fabric.Image): void {
+    this.canvas.clipPath = null;
+    phoneImage.set('opacity', 1);
+    this.canvas.renderAll();
   }
   }
   
