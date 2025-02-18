@@ -2,15 +2,7 @@
     display: flex;
     flex-direction: column;
   }
-  .styled-button {
-    background-color: #007bff; /* Color principal */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
+  
   
   .styled-button-disabled {
     background-color: #d3d3d3; /* Color para estado deshabilitado */
@@ -25,4 +17,28 @@
   button {
     margin: 10px 0; /* Espaciado entre los botones */
   }
+
+
+  .styled-button {
+    background-color: #f04c4c; /* Color rojo */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 10px; /* Bordes redondeados */
+    padding:15px 23px; /* Espaciado interno */
+    font-size: 13px; /* Tamaño de fuente */
+    font-weight:400; /* Texto en negrita */
+    cursor: pointer; /* Cursor de mano */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease; /* Transición suave */
+    margin-left: 12px;
+  }
   
+  .button-container-step-2 {
+    display: flex;
+    justify-content:right; /* Alinea horizontalmente */
+    align-items: center; /* Alinea verticalmente */
+  }
+
+  h2{
+    font-weight: bold;
+  }

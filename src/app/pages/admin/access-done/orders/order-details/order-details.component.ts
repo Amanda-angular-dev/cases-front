@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AlertifyMessagesService } from '../../../services/alertify-messages.service';
 import { OrdersService } from './orders.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class OrderDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private ordersService:OrdersService,
-    private http: HttpClient
+    private http: HttpClient,
+    private messajes:AlertifyMessagesService
   ) {}
 
   ngOnInit(): void {
@@ -43,5 +45,36 @@ export class OrderDetailsComponent implements OnInit {
         }
       );
   }
-
+  changeOrderStatusToRealizada(order): void {
+    if (order.status === 'pagada') {
+      order.status= 'realizada';
+      this.ordersService.updateOrderStatus(order._id,order.status)
+      .subscribe(
+        (data: any) => {
+          this.messajes.ordenActualizada('realizada')
+          
+          },
+        (error) => {
+          console.error('Error al obtener el historial:', error);
+        }
+      );
+    }
+    
+  }
+  changeOrderStatusToEntregada(order): void {
+    if (order.status === 'realizada') {
+      order.status= 'entregada';
+      this.ordersService.updateOrderStatus(order._id,order.status)
+      .subscribe(
+        (data: any) => {
+          this.messajes.ordenActualizada('entregada')
+          
+          },
+        (error) => {
+          console.error('Error al obtener el historial:', error);
+        }
+      );
+    }
+    
+  }
 }

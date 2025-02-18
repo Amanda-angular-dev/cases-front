@@ -36,4 +36,14 @@ getOrders(status: string = 'pendiente'): Observable<any> {
       headers: this.getHeaders(),
     });
   }
+
+  // Método para actualizar el estado de una orden
+  updateOrderStatus(orderId: string, newStatus: string): Observable<any> {
+    const url = `${environment.url_endpoint}/order/update-status/${orderId}`;
+    return this.http.put(
+      url,
+      { status: newStatus }, // El nuevo estado como cuerpo de la solicitud
+      { headers: this.getHeaders() } // Incluye los encabezados con el token
+    );
+  }
 }

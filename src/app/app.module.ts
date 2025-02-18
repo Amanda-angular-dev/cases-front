@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContenedorTopComponent } from './pages/home/contenedor-top/contenedor-top.component';
-import { HeaderComponent } from './components/header/header.component';
+
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuDesplegadoComponent } from './components/header/menu-desplegado/menu-desplegado.component';
 import { PromosComponent } from './promos/promos.component';
@@ -27,19 +27,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChoiceCaseComponent } from './pages/crear/choice-case/choice-case.component';
 import { IphoneCover2dComponent } from './pages/crear/iphone-cover2d/iphone-cover2d.component';
 import { IphoneCover3dComponent } from './pages/crear/iphone-cover3d/iphone-cover3d.component';
-import { PersonalizeButtonCaseComponent } from './components/personalize-button-case/personalize-button-case.component';
+
 import { SuccessComponent } from './pages/payment/success/success.component';
 import { CancelComponent } from './pages/payment/cancel/cancel.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UserDetailComponent } from './pages/crear/personalize/user-detail/user-detail.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
+import { HeaderAlternativoComponent } from './components/header-alternativo/header-alternativo.component';
+import { ContenedorTopAlternativoComponent } from './pages/home/contenedor-top-alternativo/contenedor-top-alternativo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContenedorTopComponent,
-    HeaderComponent,
     MenuDesplegadoComponent,
     PromosComponent,
     FooterComponent,
@@ -56,11 +56,12 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     ChoiceCaseComponent,
     IphoneCover2dComponent,
     IphoneCover3dComponent,
-    PersonalizeButtonCaseComponent,
     SuccessComponent,
     CancelComponent,
     UserDetailComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    HeaderAlternativoComponent,
+    ContenedorTopAlternativoComponent
   ],
   imports: [
     BrowserModule,

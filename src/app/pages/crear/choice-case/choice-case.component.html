@@ -1,34 +1,35 @@
-<div class="title-container">
-    <h1>Choose the Best Option for You</h1>
-  </div>
-  
-  
+
+
 <div class="container">
-  
-    <div class="left-panel">
-        <img src="./assets/case-2.png" alt="Celular" class="phone-image" /> 
-        <div class="product-container">
-            <div class="product-title">
-              <h2>CASE 2D PERSONALIZABLE</h2>
-            </div>
-            <div class="product-price">
-              <p>$60.000</p>
-            </div>
-          </div>
-        <app-personalize-button-case [url]="'/create/iphone-cover-2d'"></app-personalize-button-case>
+  <h1 class="title">
+    CHOOSE THE BEST OPTION <span>FOR YOU</span>
+  </h1>
+  <div class="options">
+    <div class="card">
+      <picture>
+        <source srcset="assets/case-2chica.png" media="(max-width: 500px)">
+        <img src="assets/case-2.png" alt="Case 2D">
+      </picture>
+      <p class="description">Case 2D Personalizable</p>
+      <p class="price">Price: $ 60.00</p>
+      <button class="btn" [routerLink]="'/create/iphone-cover-2d'">Start Customizing</button>
     </div>
-    <div class="right-panel">
-      <img src="./assets/case-3.png" alt="Celular" class="phone-image" />  
-      <div class="product-container">
-        <div class="product-title">
-          <h2>CASE 3D PERSONALIZABLE</h2>
-        </div>
-        <div class="product-price">
-          <p>$90.000</p>
-        </div>
-      </div>
-      <app-personalize-button-case  [url]="'/create/iphone-cover-3d'"></app-personalize-button-case>
+    <div class="or">OR</div>
+    <div class="card ">
+      <picture>
+        <source srcset="assets/case-3chica.png" media="(max-width: 500px)">
+        <img src="assets/case-3.png" alt="Case 3D">
+      </picture>
+      <p class="description">Case 3D Personalizable</p>
+      <p class="price">Price: $ 90.00</p>
+      <button class="btn" [routerLink] ="'/create/iphone-cover-3d'">Start Customizing</button>
     </div>
+  </div>
+  <div class="decorations">
+    <div class="circle orange" style="position: absolute; top: 20px; left: -50px;"></div>
+    <div class="circle blue" style="position: absolute;  bottom: -40px; left: -70px;"></div>
+    <div class="circle yellow" style="position: absolute; top: 30%; right: -40px;"></div>
+  </div>
 </div>
 
 <app-footer></app-footer>

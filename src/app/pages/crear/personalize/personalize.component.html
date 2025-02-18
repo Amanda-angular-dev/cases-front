@@ -1,46 +1,45 @@
 
-<mat-horizontal-stepper labelPosition="bottom" #stepper>
+<mat-vertical-stepper labelPosition="bottom" #stepper>
   <!-- Paso 1: Subir imagen -->
   <mat-step [stepControl]="firstFormGroup">
     <ng-template matStepLabel>Add image</ng-template>
     <div class="container">
       <div class="columna-1-step-1">
-        <div class="upload-button">
-          <div class="header">
-            <h1>Add Image</h1>
-          </div>
-          <input type="file" id="upload" />
-          <label for="file-upload">
-            <span>Upload Image</span>
-          </label>
-          <img src="./assets/upload.png" alt="Upload Icon" />
+        
+        <div class="upload-box">
+          <input type="file" id="upload" class="upload-input" />
+          <div class="upload-icon">
+            <svg height="512" viewBox="0 0 32 32" width="42" height="42" xmlns="http://www.w3.org/2000/svg">
+              <g id="cloud_upload" data-name="cloud upload">
+                <path d="m25.8 1.25h-19.6a4.952 4.952 0 0 0 -4.95 4.95v19.6a4.952 4.952 0 0 0 4.95 4.95h19.6a4.952 4.952 0 0 0 4.95-4.95v-19.6a4.952 4.952 0 0 0 -4.95-4.95zm-9.05 23.75a.75.75 0 0 1 -1.5 0v-8.989l-1.195 1.195a.75.75 0 0 1 -1.061-1.061l2.476-2.475a.75.75 0 0 1 1.061 0l2.475 2.475a.75.75 0 0 1 -1.061 1.061l-1.195-1.195zm7.29-4.65h-6.04a.75.75 0 0 1 0-1.5h6.04a1.443 1.443 0 0 0 0-2.885h-.588a.75.75 0 0 1 -.649-1.126 3.635 3.635 0 0 0 -3.149-5.452 3.665 3.665 0 0 0 -.468.03.75.75 0 0 1 -.647-.235 4.453 4.453 0 0 0 -7.69 2.471.75.75 0 0 1 -.732.658 2.175 2.175 0 0 0 -2.051 2.782.75.75 0 0 1 -.51.93 1.443 1.443 0 0 0 .4 2.828h6.044a.75.75 0 0 1 0 1.5h-6.04a2.942 2.942 0 0 1 -1.462-5.5 3.675 3.675 0 0 1 2.966-3.979 5.953 5.953 0 0 1 9.91-2.981q.139-.007.279-.008a5.138 5.138 0 0 1 4.915 6.626 2.943 2.943 0 0 1 -.53 5.837z" fill="#303672" fill-rule="evenodd"/>
+              </g>
+            </svg>  
+          </div> <!-- Unicode for the upload icon -->
+          <div class="upload-text">Upload an image</div>
         </div>
-
-        <div>
-          <div style="text-align: center; margin-bottom: 10px;">
-            <h3 style="font-family: Arial, sans-serif; font-weight: normal; color: #555;">Rotate Cellphone</h3>
-          </div>
-          <button (click)="alignPhoneTemplate('vertical')" title="Alinear vertical">
-            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-              <path d="M12 2v20m0-20L6 8m6-6l6 6" stroke="black" stroke-width="2" fill="none" />
-            </svg>
-          </button>
-          <button (click)="alignPhoneTemplate('horizontal')" title="Alinear horizontal">
-            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-              <path d="M22 12H2m20 0l-6-6m6 6l-6 6" stroke="black" stroke-width="2" fill="none" />
-            </svg>
-          </button>
+        
+        <div class="rotate-container">
+          <!-- Botón con flecha hacia arriba -->
+          <a style="background-color: white;width: 32px;cursor: pointer; " (click)="alignPhoneTemplate('vertical')">
+            <img src="assets/flecha-hacia-arriba.jpg" alt="Flecha arriba"  />
+          </a>
+        
+          <!-- Texto del mensaje -->
+          <span class="rotate-text">Rotate Cellphone</span>
+        
+          <!-- Botón con flecha hacia la derecha -->
+          <a style="background-color: white; width:46px;cursor: pointer;" (click)="alignPhoneTemplate('horizontal')">
+            <img src="assets/flecha-horizontal.jpg" alt="Flecha arriba"  />
+          </a>
         </div>
-      </div>
-
-      <canvas id="canvas"></canvas>
-
-      <div class="button-container">
-        <button mat-button matStepperNext
-         (click)="moveImageToFinalCanvas()" 
-          
-          class="styled-button"
-          >Next</button>
+        <canvas id="canvas"></canvas>
+        <div class="button-container-1">
+            <button mat-button matStepperNext
+              (click)="moveImageToFinalCanvas()" 
+              class="styled-button">    
+               Next</button>             
+        </div>      
+              
       </div>
     </div>
   </mat-step>
@@ -48,14 +47,19 @@
   <!-- Paso 2: Ver cómo se verá -->
   <mat-step [stepControl]="secondFormGroup">
     <ng-template matStepLabel>See how it would look</ng-template>
-    <div class="container">
-      <div>
-        <h6>Step 2: Final image on the cell phone</h6>
-        <canvas id="finalCanvas" width="400" height="400"></canvas>
-      </div>
-
-      <div class="button-container-step-2">
+    <div class="container step-container-2 ">
+      <div class="button-container-step-2 item1-step2">
         <button mat-button matStepperPrevious class="styled-button">Back</button>
+      </div>
+      
+      <div class=" item2-step2"  style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <h6 >Step 2: Final image on the cell phone</h6>
+        <canvas   id="finalCanvas" width="400" height="400"></canvas>
+      </div>
+      
+      
+      <div class="button-container-step-2 item4-step2">
+        
         <button mat-button matStepperNext (click)="loadToCanvasTresFinal()" class="styled-button">Next</button>
       </div>
     </div>
@@ -76,63 +80,104 @@
   <!-- Paso 4: Ordenar y comprar -->
   <mat-step>
     <ng-template matStepLabel>Order and buy</ng-template>
-    <p>You are now done.</p>
+    
     <div class="order-summary">
-      <h2>Order Summary</h2>
-      <div class="summaryorder">
+
+      <h2 style="position: relative; left: -35;">Order Summary</h2>
+      
+      
+      
+      <div class="address">
         <canvas *ngIf="currentOrientation === 'vertical'" id="canvasTresFinal" width="150" height="200"></canvas>
         <canvas *ngIf="currentOrientation === 'horizontal'" id="canvasTresFinal" width="150" height="100"></canvas>
         <div>
           <table class="order-table">
             <thead>
               <tr>
-                <th>Phone Name</th>
-                <th>Quantity</th>
-                <th>Border Color</th>
-                <th>Price</th>
+
+                <th colspan="2">Case phone</th> <!-- Colspan 2 para que ocupe ambas columnas -->
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td>Phone Name</td>
                 <td>{{ order.namePhone }}</td>
+                
+              </tr>
+              <tr>
+                
+                <td>Quantity</td>
                 <td>{{ order.quantity }}</td>
+                
+              </tr>
+              <tr>
+                
+                
+                <td>Border Color</td>
                 <td>{{ order.borderColor }}</td>
-                <td>{{order.quantity * order.price }}</td>
+               
+              </tr>
+              <tr>
+                
+                
+                <td>Price</td>
+                <td>$ {{order.quantity * order.price }}</td>
               </tr>
             </tbody>
           </table>
-          <table class="order-table">
-            <thead>
-              <tr>
-                <th colspan="2">Send to...</th> <!-- Colspan 2 para que ocupe ambas columnas -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Name</td>
-                <td>{{  user?.name }}</td>
-              </tr>
-              <tr>
-                <td>Email</td>
-                <td>{{ user?.email }}</td>
-              </tr>
-              <tr>
-                <td>Teléfono</td>
-                <td>{{ user?.phone }}</td>
-              </tr>
-              <tr>
-                <td>Address</td>
-                <td>{{ user?.address}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-container">
+            <table class="order-table">
+              <thead>
+                <tr>
+                  <th colspan="2">Send to...</th> <!-- Colspan 2 para que ocupe ambas columnas -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>full Name</td>
+                  <td>{{  user?.name }} {{  user?.lastName }}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>{{ user?.email }}</td>
+                </tr>
+                <tr>
+                  <td>Teléfono</td>
+                  <td>{{ user?.phone }}</td>
+                </tr>
+                <tr>
+                  <td>streetName</td>
+                  <td>{{ user?.address.streetName}}</td>
+                </tr>
+                <tr>
+                  <td>streetNumber</td>
+                  <td>{{ user?.address.streetNumber}}</td>
+                </tr>
+                <tr>
+                  <td>city</td>
+                  <td>{{ user?.address.city}}</td>
+                </tr>
+                <tr>
+                  <td>state</td>
+                  <td>{{ user?.address.state}}</td>
+                    
+                </tr>
+                <tr>
+                  <td>zipCode</td>
+                  <td>{{ user?.address.zipCode}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <button *ngIf="!redirecting" class="buy-button" (click)=" pay()"  [disabled]="!order">
+            Buy
+          </button>
         </div>
         
       </div>
 
-      <button *ngIf="!redirecting" class="buy-button" (click)=" pay()"  [disabled]="!order">
-        Buy
-      </button>
+      
       <img *ngIf="redirecting" src="/assets/redirecting.gif" class="redirecting" alt="">
     </div>
 
@@ -141,7 +186,7 @@
       <button mat-button (click)="stepper.reset()" class="styled-button">Reset</button>
     </div>
   </mat-step>
-</mat-horizontal-stepper>
+</mat-vertical-stepper>
 
 
   

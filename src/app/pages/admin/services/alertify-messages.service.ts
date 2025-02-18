@@ -29,4 +29,7 @@ export class AlertifyMessagesService {
   invalidUser(){
     alertify.error('el usuario o contraseña fue incorrecta'); 
   }
+  ordenActualizada(estado:string){
+    alertify.success('se actualizo el estado de la orden a:',estado);
+  }
 }

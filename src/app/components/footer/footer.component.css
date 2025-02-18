@@ -1,12 +1,42 @@
 :host {
-    height: 50px; /* Altura del footer */
-    background-color: #0033a0;
+    
     color: white;
     text-align: center;
-    padding: 10px 0;
+    
     margin-top: auto; /* Empuja el contenido hacia arriba */
     display: block;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+   
+    z-index: 4;
+    
   }
+
+  /* Footer General Styles */
+.footer {
+  background-color: #303672;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Logo Section */
+.footer-logo img {
+  max-width: 150px; /* Adjust size as needed */
+  margin-bottom: 10px;
+}
+
+.footer-logo p {
+  margin: 0;
+  font-size: 12px;
+}
+
+

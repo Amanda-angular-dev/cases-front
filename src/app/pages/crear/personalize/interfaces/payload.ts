@@ -22,8 +22,15 @@ export interface Payload {
   
   export interface UserDetails {
     name: string;
+    lastName: string;
     email: string;
     phone: string;
-    address: string;
+    address: {
+      streetName: string;
+      streetNumber: string;
+      city: string;
+      state: string;
+      zipCode: string;
+    };
   }
   

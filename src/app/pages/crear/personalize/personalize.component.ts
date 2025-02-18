@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { StripeService } from 'src/app/pages/crear/personalize/services/stripe.service';
 import { Order } from 'src/app/pages/crear/personalize/interfaces/order';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { WorkOrderService } from 'src/app/pages/crear/personalize/services/work-order.service';
+
 import { Payload, UserDetails } from 'src/app/pages/crear/personalize/interfaces/payload';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 export class PersonalizeComponent implements AfterViewInit {
   canvas!: fabric.Canvas;
   finalCanvas!: fabric.Canvas; // Canvas para el segundo paso
-  
+  originalImage: string | null = null; // URL base64 de la imagen original
+  savedImage2: File | null = null;     // Archivo original cargado por el usuario
   
   dataURL2
 
@@ -36,7 +37,7 @@ export class PersonalizeComponent implements AfterViewInit {
 
   constructor(//private ngZone: NgZone, 
               private stripeService: StripeService,
-              private workOrderService: WorkOrderService,
+              
               private router: Router,
               private cdr: ChangeDetectorRef) { }
 
@@ -124,47 +125,50 @@ export class PersonalizeComponent implements AfterViewInit {
   }
 
   uploadImage(event: Event): void {
-   // this.ngZone.runOutsideAngular(() => {
-      const input = event.target as HTMLInputElement;
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const userImage = new Image();
-          userImage.src = e.target?.result as string;
-
-          
-
-          userImage.onload = () => {
-            const img = new fabric.Image(userImage);
-            img.scaleToWidth(250);
-            img.set({
-              left: 75,
-              top: 0,
-              selectable: true
-            });
-
-            this.removeUserUploadedImages();
-
-            const clipPath = new fabric.Rect({
-              left: 0,
-              top: 0,
-              width: 400,
-              height: 400,
-              absolutePositioned: true,
-            });
-
-            img.set({ clipPath });
-            this.canvas.add(img);
-            this.canvas.sendToBack(img);
-            this.canvas.renderAll();
-            
-            
-             
-          };
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0]; // Archivo original
+      const reader = new FileReader();
+  
+      // Guardar el archivo original
+      this.savedImage2 = file;
+  
+      reader.onload = (e) => {
+        // Guardar la URL base64 original para referencia (si es necesario)
+        const originalBase64 = e.target?.result as string;
+        this.originalImage = originalBase64;
+  
+        const userImage = new Image();
+        userImage.src = originalBase64;
+  
+        userImage.onload = () => {
+          const img = new fabric.Image(userImage);
+          img.scaleToWidth(250);
+          img.set({
+            left: 75,
+            top: 0,
+            selectable: true
+          });
+  
+          this.removeUserUploadedImages();
+  
+          const clipPath = new fabric.Rect({
+            left: 0,
+            top: 0,
+            width: 400,
+            height: 400,
+            absolutePositioned: true,
+          });
+  
+          img.set({ clipPath });
+          this.canvas.add(img);
+          this.canvas.sendToBack(img);
+          this.canvas.renderAll();
         };
-        reader.readAsDataURL(input.files[0]);
-      }
-   // });
+      };
+  
+      reader.readAsDataURL(file); // Leer como base64 para usarla en el canvas
+    }
   }
   
   
@@ -423,49 +427,30 @@ alignPhoneTemplate(orientation: 'horizontal' | 'vertical'): void {
     this.redirecting =true
   
     try {
-       // Verifica que el canvas exista y sea válido
+   
 
-// Verifica que el canvas exista y sea válido
-if (!this.canvas || typeof this.canvas.getObjects !== 'function') {
-  console.error('Canvas no está inicializado o no es válido');
-  return;
-}
-
-// Obtén los objetos en el canvas
-const imagesOnCanvas = this.canvas.getObjects('image');
-const phoneImage = imagesOnCanvas.find(img => img.name === 'phoneImage');
-
-
-  // Oculta temporalmente el teléfono
-  phoneImage.set('visible', false);
-  this.canvas.renderAll(); // Actualiza el canvas
-
-  // Genera el dataURL sin incluir el teléfono
-  const dataURL = this.canvas.toDataURL({
-    format: 'png', // Puede ser 'jpeg' si prefieres otro formato
-    quality: 1,    // Calidad máxima
-  });
-
-  // Restaura la visibilidad del teléfono
-  phoneImage.set('visible', true);
-  this.canvas.renderAll(); // Actualiza el canvas nuevamente
-
-  console.log('Imagen generada sin el teléfono:', dataURL);
-
-
-
-
-      
-     
+  
+  
+    
       // Enviar la orden al backend
-      this.workOrderService.addOrder(this.user.name,this.user.email,this.user.phone,this.user.address,this.croppedImage,dataURL).subscribe({
+      this.stripeService
+      .createCheckoutSession(this.user.name,
+        this.user.lastName,
+        this.user.email,
+        this.user.phone,
+        this.user.address.streetName,
+        this.user.address.streetNumber,
+        this.user.address.city,
+        this.user.address.state,
+        this.user.address.zipCode,
+        this.croppedImage,
+        this.originalImage).subscribe({
         next: (response) => {
-          // Clonar el lienzo original
-          
-
-          
-          console.log('Orden enviada exitosamente:', response);
-          this.initiateStripePayment(response.id,response.imagen);
+          console.log('Sesión creada:', response);
+          this.stripeService.redirectToCheckout(response.id).subscribe({
+            next: () => console.log('Redirigiendo a Stripe...'),
+            error: (err) => console.error('Error en la redirección:', err),
+          });
         },
         error: (error) => {
           console.error('Error al enviar la orden:', error);
@@ -491,31 +476,7 @@ const phoneImage = imagesOnCanvas.find(img => img.name === 'phoneImage');
   }
 
   
-  initiateStripePayment(id,imagen) {
-    const productName = this.order.namePhone;
-    const productPrice = this.order.price; // Precio en centavos
-    const productQuantity = this.order.quantity;
-    const borderColor = this.order.borderColor; // Color del borde
-    const dx = this.order.dx;
   
-    this.stripeService
-      .createCheckoutSession(productName, productPrice, productQuantity, borderColor,dx,id,imagen)
-      .subscribe({
-        next: (response) => {
-          console.log('Sesión creada:', response);
-          this.stripeService.redirectToCheckout(response.id).subscribe({
-            next: () => console.log('Redirigiendo a Stripe...'),
-            error: (err) => console.error('Error en la redirección:', err),
-          });
-        },
-        error: (err) => console.error('Error al crear la sesión:', err),
-      });
-  }
-  private restoreCanvasState(phoneImage: fabric.Image): void {
-    this.canvas.clipPath = null;
-    phoneImage.set('opacity', 1);
-    this.canvas.renderAll();
-  }
   }
   
   

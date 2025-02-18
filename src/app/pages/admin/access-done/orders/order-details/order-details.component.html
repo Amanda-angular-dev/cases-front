@@ -40,9 +40,11 @@
         <li><strong>Email:</strong> {{ order.userEmail }}</li>
         <li><strong>Teléfono:</strong> {{ order.userPhone }}</li>
         <li><strong>Dirección:</strong> {{ order.userAddress }}</li>
-        <li><strong>Estado:</strong> {{ order.state }}</li>
+        <li><strong>status:</strong> {{ order.status }}</li>
         <li><strong>Fecha de Creación:</strong> {{ order.createdAt | date:'short' }}</li>
       </ul>
+      <button *ngIf="order.status==='pagada'" (click)="changeOrderStatusToRealizada(order)" type="button" class="btn btn-primary">enviar a realizadas</button>
+      <button *ngIf="order.status==='realizada'" (click)="changeOrderStatusToEntregada(order)"type="button" class="btn btn-primary">enviar a entregadas</button>
     </div>
   </div>
   

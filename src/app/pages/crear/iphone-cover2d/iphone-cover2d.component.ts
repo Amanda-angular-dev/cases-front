@@ -51,6 +51,11 @@ export class IphoneCover2dComponent implements OnInit {
     // Asignar el nombre seleccionado
     this.namePhone = selectedName;
 
+   
+    if (this.namePhone !== 'Choose your phone') {
+      this.messageErrorChoiceAModel = false; // Oculta el mensaje de error cuando se selecciona un modelo válido
+    }
+
    // Verificar si la selección es válida
    if (this.namePhone !== 'Choose your phone'&&this.borderColor != 'Choose your border color') {
      this.messageErrorChoiceAModel = false;
@@ -59,6 +64,11 @@ export class IphoneCover2dComponent implements OnInit {
   }
   onBorderColorChange(event: Event): void {
     this.borderColor = (event.target as HTMLSelectElement).value;
+
+    if (this.borderColor !== 'Choose your border color') {
+      this.messageErrorChoiceABorder = false; // Oculta el mensaje de error cuando se selecciona un borde válido
+    }
+    
     if(this.borderColor != 'Choose your border color'&&this.namePhone !== 'Choose your phone'){
       this.messageErrorChoiceABorder = false
       console.log('border color chequeo '+this.borderColor)

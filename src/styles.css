@@ -7,3 +7,24 @@ html,body{
 }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Altura completa de la ventana */
+  }
+  
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la ventana */
+  }
+  
+  .main-content {
+    flex: 1; /* Este se expande para ocupar todo el espacio disponible entre el header y el footer */
+    
+  }
+  
+  img{
+    width: 100%;
+  }
+  
