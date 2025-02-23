@@ -24,6 +24,7 @@ export class IphoneCover2dComponent implements OnInit {
   messageErrorChoiceABorder=false
   messageAvaibleQuantity= false
   message = ''
+  imageUrl: string = 'iphone-c'; // Valor inicial
   constructor(
     
               private router: Router,
@@ -53,6 +54,8 @@ export class IphoneCover2dComponent implements OnInit {
 
    
     if (this.namePhone !== 'Choose your phone') {
+       // Remover espacios del nombre del teléfono
+      this.imageUrl = `${this.namePhone.replace(/\s+/g, '')}`;
       this.messageErrorChoiceAModel = false; // Oculta el mensaje de error cuando se selecciona un modelo válido
     }
 

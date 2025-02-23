@@ -4,8 +4,8 @@
 <div class="customization-container">
   <div class="phone-preview">
     <picture>
-      <source srcset="assets/iphone-chica.png" media="(max-width: 500px)">
-      <img src="assets/iphone-c.png" alt="iphone-c">
+      <source [srcset]="'assets/' + imageUrl + '-chica.png'" media="(max-width: 500px)">
+      <img [src]="'assets/' + imageUrl + '.png'" [alt]="imageUrl">
     </picture>
   </div>
   <div class="controls">

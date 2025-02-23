@@ -58,7 +58,7 @@
 }
 
 canvas {
-  border: 1px solid #ccc;
+  
   display: block;
   margin: 0 auto;
   background-color: #f8f8f8;
@@ -151,9 +151,9 @@ button {
 
 
 #finalCanvas , #canvasTresFinal{
-  border-radius: 25px; /* Radio del borde */
-  overflow: hidden;    /* Asegura que el contenido no sobresalga */
-  border: 2px solid #000; /* Opcional: Borde visible */
+ 
+  
+ 
 }
 
 .header {
@@ -383,3 +383,4 @@ h2{
     width: 200px;
   }
 }
+

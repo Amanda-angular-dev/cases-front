@@ -1,3 +1,9 @@
+:host{
+  position: relative;
+  display: block;
+  height: auto;
+  padding-bottom: 100px;
+}
 h2{
     text-align: center;
     margin-top: 30px;
@@ -15,20 +21,24 @@ h2{
   /* Estilos para pantallas más grandes (por defecto) */
   @media (min-width: 760px) {
     .grid-container {
-      grid-template-columns: repeat(5, 1fr); /* 5 columnas iguales */
+      grid-template-columns: repeat(4, auto); /* 5 columnas iguales */
     }
   }
   
   /* Estilos para pantallas menores a 760px */
   @media (max-width: 759px) {
     .grid-container {
-      grid-template-columns: 1fr; /* 1 columna por fila */
+      grid-template-columns: repeat(4, auto); /* 1 columna por fila */
     }
   }
-  
+  @media (max-width:537px) {
+    .grid-container {
+      grid-template-columns: repeat(2, auto); /* 1 columna por fila */
+    }
+  }
   /* Estilos para cada ítem */
 .item {
-    background-color: #007bff; /* Fondo azul */
+    position: relative;
     height: 200px;
     color: white; /* Texto blanco */
     text-align: center; /* Centrar texto horizontalmente */
@@ -36,8 +46,9 @@ h2{
     font-size: 18px; /* Tamaño de letra */
     font-weight: bold; /* Negrita */
     border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+    
     transition: transform 0.3s, box-shadow 0.3s; /* Animación suave */
+    text-align: center;
   }
   
   /* Efecto hover */
@@ -59,7 +70,7 @@ h2{
   /* Ítems flexibles */
   .item-flex {
     flex: 1; /* Cada ítem ocupa el mismo espacio */
-    background-color: #007bff; /* Fondo azul */
+    /*background-color: #007bff;  Fondo azul */
     color: white; /* Color de texto */
     height: 150px; /* Altura fija, ajustable según tus necesidades */
     border-radius: 8px; /* Bordes redondeados */
@@ -87,3 +98,65 @@ h2{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
   }
   
+  p {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  .blue {
+    color: #4A90E2; /* Azul */
+  }
+  
+  .orange {
+    color: #F57C25; /* Naranja */
+  }
+  
+
+  .item img {
+    max-width: 100%!important;  /* No más grande que su contenedor */
+    height: auto!important;     /* Mantiene la proporción */
+  }
+
+  .offer-label {
+    position: absolute;
+    top: 10px;
+    left: 18px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 3px;
+  }
+
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+  
+  .circle.orange {
+    width: 100px;
+    height: 100px;
+    background-color: #ff6f00;
+    top: -10%;
+    left: 5%;
+  }
+  
+  .circle.blue {
+    width: 50px;
+    height: 50px;
+    background-color: #2c7cf7;
+    top: 30%;
+    right: 0%;
+  }
+  
+  .circle.yellow {
+    width: 120px;
+    height: 120px;
+    background-color: #ffeb3b;
+    bottom: 5%;
+    left: 0%;
+  }

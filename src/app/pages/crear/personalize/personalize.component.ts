@@ -34,6 +34,7 @@ export class PersonalizeComponent implements AfterViewInit {
   savedImage
   imageWithoutPhone
   imageWithPhone
+  urlimagenphone=''
 
   constructor(//private ngZone: NgZone, 
               private stripeService: StripeService,
@@ -57,7 +58,11 @@ export class PersonalizeComponent implements AfterViewInit {
       this.order = JSON.parse(orderData);
       console.log(this.order)
     }
-
+    // Verifica si `namePhone` existe en `this.order`
+    if (this.order?.namePhone) {
+      // Elimina los espacios en blanco y asigna a la nueva propiedad
+      this.urlimagenphone = this.order.namePhone.replace(/\s+/g, '');
+    }
   }
   ngAfterViewInit(): void {
     //this.ngZone.runOutsideAngular(() => {
@@ -93,7 +98,7 @@ export class PersonalizeComponent implements AfterViewInit {
 
 
   loadPhoneTemplate(): void {
-    const phoneImageURL = 'assets/proyecto-nuevo.png'; // Ruta de la plantilla del celular
+    const phoneImageURL =  `assets/${this.urlimagenphone}personalizar.png` // Ruta de la plantilla del celular
     fabric.Image.fromURL(phoneImageURL, (img) => {
       const canvasWidth = this.canvas.width!;
       const canvasHeight = this.canvas.height!;
@@ -237,7 +242,7 @@ export class PersonalizeComponent implements AfterViewInit {
       this.createCanvasForVertical();
      
         const clipRect = new fabric.Rect({
-          left: 124,
+          left: 123,
           top: 50,
           width: 152,
           height: 300,

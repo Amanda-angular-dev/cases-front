@@ -10,26 +10,15 @@ import { isThisTypeNode } from 'typescript';
 })
 export class StateGlobalService {
   phones = [
-    { nombre: 'iPhone 12 Mini' },
-    { nombre: 'iPhone 12' },
-    { nombre: 'iPhone 12 Pro' },
-    { nombre: 'iPhone 12 Pro Max' },
-    { nombre: 'iPhone 13 Mini' },
-    { nombre: 'iPhone 13' },
-    { nombre: 'iPhone 13 Pro' },
-    { nombre: 'iPhone 13 Pro Max' },
-    { nombre: 'iPhone 14' },
-    { nombre: 'iPhone 14 Plus' },
-    { nombre: 'iPhone 14 Pro' },
-    { nombre: 'iPhone 14 Pro Max' },
-    { nombre: 'iPhone 15' },
-    { nombre: 'iPhone 15 Plus' },
-    { nombre: 'iPhone 15 Pro' },
-    { nombre: 'iPhone 15 Pro Max' },
-    { nombre: 'SE Segunda Generación' },
-    { nombre: 'iPhone 16' },
-    { nombre: 'iPhone 16 Pro' },
-    { nombre: 'iPhone 16 Pro Max' }
+    { nombre: 'Iphone 15' },
+    { nombre: 'Iphone 15 Plus' },
+    { nombre: 'Iphone 15 Pro' },
+    { nombre: 'Iphone 15 Pro Max' },
+    { nombre: 'Iphone 16' },
+    { nombre: 'Iphone 16 e' },
+    { nombre: 'Iphone 16 Plus' },
+    { nombre: 'Iphone 16 Pro' },
+    { nombre: 'Iphone 16 Pro Max' }
   ];
   
   
