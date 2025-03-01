@@ -34,6 +34,7 @@ export class IphoneCover2dComponent implements OnInit {
     this.phonesNombres =  this.stateGlobalService.phones
     this.stateGlobalService.getCases2d().subscribe((data) => {
       this.phonesCompletyData= data;
+      console.log('Datos recibidos:', JSON.stringify(this.phonesCompletyData, null, 2));
     });
     this.quantityControl.valueChanges.subscribe((value) => {
       this.quantityCase = value;

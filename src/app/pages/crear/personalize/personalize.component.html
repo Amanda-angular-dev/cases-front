@@ -1,11 +1,11 @@
 
-<mat-vertical-stepper labelPosition="bottom" #stepper>
+<mat-vertical-stepper labelPosition="bottom" #stepper [linear]="true">
   <!-- Paso 1: Subir imagen -->
-  <mat-step [stepControl]="firstFormGroup">
-    <ng-template matStepLabel>Add image</ng-template>
+  <mat-step [stepControl]="firstFormGroup" [completed]="habilitarSteptwo">
+    <ng-template matStepLabel   >Add image</ng-template>
     <div class="container">
       <div class="columna-1-step-1">
-        
+       <div class="primeracolumnacontenedorsetp1">
         <div class="upload-box">
           <input type="file" id="upload" class="upload-input" />
           <div class="upload-icon">
@@ -32,10 +32,12 @@
             <img src="assets/flecha-horizontal.jpg" alt="Flecha arriba"  />
           </a>
         </div>
-        <canvas id="canvas"></canvas>
+       </div>
+        
+        <canvas class="phone" id="canvas"></canvas>
         <div class="button-container-1">
             <button mat-button matStepperNext
-              (click)="moveImageToFinalCanvas()" 
+              (click)="moveImageToFinalCanvas();" 
               class="styled-button">    
                Next</button>             
         </div>      
@@ -45,7 +47,7 @@
   </mat-step>
 
   <!-- Paso 2: Ver cómo se verá -->
-  <mat-step [stepControl]="secondFormGroup">
+  <mat-step [stepControl]="secondFormGroup" [completed]="habilitarSteptree">
     <ng-template matStepLabel>See how it would look</ng-template>
     <div class="container step-container-2 ">
       <div class="button-container-step-2 item1-step2">
@@ -66,19 +68,22 @@
   </mat-step>
 
   <!-- Paso 3: Cargar datos del usuario -->
-  <mat-step>
+  <mat-step [completed]="isFormValid">
     <ng-template matStepLabel>Enter user details</ng-template>
     <div >
       <h2>User Information</h2>
       
-      <app-user-detail (formSubmitted)="handleFormSubmitted($event)"></app-user-detail>
+      <app-user-detail 
+        (formValid)="handleFormValid($event)"
+        (formSubmitted)="handleFormSubmitted($event)">
+      </app-user-detail>
       
     </div>
    
   </mat-step>
 
   <!-- Paso 4: Ordenar y comprar -->
-  <mat-step>
+  <mat-step >
     <ng-template matStepLabel>Order and buy</ng-template>
     
     <div class="order-summary">
@@ -88,8 +93,11 @@
       
       
       <div class="address">
-        <canvas *ngIf="currentOrientation === 'vertical'" id="canvasTresFinal" width="150" height="200"></canvas>
-        <canvas *ngIf="currentOrientation === 'horizontal'" id="canvasTresFinal" width="150" height="100"></canvas>
+        <div>
+          <canvas *ngIf="currentOrientation === 'vertical'" id="canvasTresFinal" width="150" height="200"></canvas>
+          <canvas *ngIf="currentOrientation === 'horizontal'" id="canvasTresFinal" width="150" height="100"></canvas>
+        </div>
+        
         <div>
           <table class="order-table">
             <thead>
@@ -125,54 +133,55 @@
               </tr>
             </tbody>
           </table>
-          <div class="table-container">
-            <table class="order-table">
-              <thead>
-                <tr>
-                  <th colspan="2">Send to...</th> <!-- Colspan 2 para que ocupe ambas columnas -->
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>full Name</td>
-                  <td>{{  user?.name }} {{  user?.lastName }}</td>
-                </tr>
-                <tr>
-                  <td>Email</td>
-                  <td>{{ user?.email }}</td>
-                </tr>
-                <tr>
-                  <td>Teléfono</td>
-                  <td>{{ user?.phone }}</td>
-                </tr>
-                <tr>
-                  <td>streetName</td>
-                  <td>{{ user?.address.streetName}}</td>
-                </tr>
-                <tr>
-                  <td>streetNumber</td>
-                  <td>{{ user?.address.streetNumber}}</td>
-                </tr>
-                <tr>
-                  <td>city</td>
-                  <td>{{ user?.address.city}}</td>
-                </tr>
-                <tr>
-                  <td>state</td>
-                  <td>{{ user?.address.state}}</td>
-                    
-                </tr>
-                <tr>
-                  <td>zipCode</td>
-                  <td>{{ user?.address.zipCode}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          
           
           <button *ngIf="!redirecting" class="buy-button" (click)=" pay()"  [disabled]="!order">
             Buy
           </button>
+        </div>
+        <div class="table-container">
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th colspan="2">Send to...</th> <!-- Colspan 2 para que ocupe ambas columnas -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>full Name</td>
+                <td>{{  user?.name }} {{  user?.lastName }}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{{ user?.email }}</td>
+              </tr>
+              <tr>
+                <td>Teléfono</td>
+                <td>{{ user?.phone }}</td>
+              </tr>
+              <tr>
+                <td>streetName</td>
+                <td>{{ user?.address.streetName}}</td>
+              </tr>
+              <tr>
+                <td>streetNumber</td>
+                <td>{{ user?.address.streetNumber}}</td>
+              </tr>
+              <tr>
+                <td>city</td>
+                <td>{{ user?.address.city}}</td>
+              </tr>
+              <tr>
+                <td>state</td>
+                <td>{{ user?.address.state}}</td>
+                  
+              </tr>
+              <tr>
+                <td>zipCode</td>
+                <td>{{ user?.address.zipCode}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         
       </div>

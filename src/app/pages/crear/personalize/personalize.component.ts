@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { fabric } from 'fabric';
 import { StripeService } from 'src/app/pages/crear/personalize/services/stripe.service';
 import { Order } from 'src/app/pages/crear/personalize/interfaces/order';
@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Payload, UserDetails } from 'src/app/pages/crear/personalize/interfaces/payload';
 import { Router } from '@angular/router';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-personalize',
@@ -35,16 +37,24 @@ export class PersonalizeComponent implements AfterViewInit {
   imageWithoutPhone
   imageWithPhone
   urlimagenphone=''
+  isLinear = true;
+  habilitarSteptwo=false
+  habilitarSteptree=false
 
+  @ViewChild(MatStepper) stepper!: MatStepper;
+  isFormValid = false;
   constructor(//private ngZone: NgZone, 
               private stripeService: StripeService,
-              
+              private _formBuilder: FormBuilder,
               private router: Router,
               private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.loadOrder();
    
+  }
+  handleFormValid(valid: boolean) {
+    this.isFormValid = valid;
   }
   handleFormSubmitted(data: any) {
     this.user = data;
@@ -74,7 +84,9 @@ export class PersonalizeComponent implements AfterViewInit {
       uploadInput.addEventListener('change', (event) => this.uploadImage(event));
     //});
   }
-
+  avanzarPaso() {
+    this.stepper.next(); // Avanza al siguiente paso
+  }
   initializeCanvas(): void {
     // Lienzo principal
     this.canvas = new fabric.Canvas('canvas', {
@@ -183,7 +195,7 @@ export class PersonalizeComponent implements AfterViewInit {
     //y necesito saber la imagen del celular o sea su relleno que tanto esta alejado
     //de left y de top del borde del liezo
     // Definir un área de recorte: la pantalla del celular en el primer lienzo
-
+    this.habilitarSteptwo=true
     if (this.currentOrientation === 'horizontal') {
       this.createCanvasForHorizontal();
       
@@ -237,6 +249,9 @@ export class PersonalizeComponent implements AfterViewInit {
       this.canvas.renderAll();
           
         });
+        setTimeout(() => {
+          this.avanzarPaso()
+        }, 0);
       
     } else {
       this.createCanvasForVertical();
@@ -294,7 +309,9 @@ export class PersonalizeComponent implements AfterViewInit {
       
     }
 
-    
+    setTimeout(() => {
+      this.avanzarPaso()
+    }, 0);
   }
 
 
@@ -357,6 +374,7 @@ export class PersonalizeComponent implements AfterViewInit {
   }
   
   loadToCanvasTresFinal() {
+    this.habilitarSteptree=true
     const sourceCanvas = document.getElementById('finalCanvas') as HTMLCanvasElement;
     const targetCanvas = document.getElementById('canvasTresFinal') as HTMLCanvasElement;
 
@@ -369,6 +387,9 @@ export class PersonalizeComponent implements AfterViewInit {
         targetContext.drawImage(sourceCanvas, 0, 0, targetCanvas.width, targetCanvas.height);
       }
     }
+    setTimeout(() => {
+      this.avanzarPaso()
+    }, 0);
   }
 
   
@@ -480,14 +501,33 @@ alignPhoneTemplate(orientation: 'horizontal' | 'vertical'): void {
     this.cdr.detectChanges();
   }
 
-  
+    onStepChange(event:  StepperSelectionEvent) {
+    // Verifica el índice del paso seleccionado y ejecuta el método correspondiente
+    switch (event.selectedIndex) {
+      case 0: 
+        // Llama al método de carga de la imagen para el primer paso
+        this.moveImageToFinalCanvas();
+        break;
+      case 1:
+        // Aquí puedes poner el código para cargar el canvas final si es necesario
+        this.loadToCanvasTresFinal();
+        break;
+      case 2:
+        // Cualquier acción para el tercer paso
+        break;
+      case 3:
+        // Cualquier acción para el cuarto paso
+        break;
+    }
+  }
+
   
   }
   
   
+
   
-  
-  
+
   
   
 

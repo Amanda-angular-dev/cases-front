@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UserDetailComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<any>(); // Evento para enviar datos al padre
   userFormGroup!: FormGroup;
-
+  @Output() formValid = new EventEmitter<boolean>();
   constructor(private fb: FormBuilder
    ) { }
   
@@ -29,6 +29,10 @@ export class UserDetailComponent implements OnInit {
         state: ['', [Validators.required]],
         zipCode: ['', [Validators.required, Validators.pattern('^[0-9]{5}$')]]
       })
+    });
+    // Emitimos si el formulario es válido o no
+    this.userFormGroup.statusChanges.subscribe(() => {
+      this.formValid.emit(this.userFormGroup.valid);
     });
   }
   onNext() {

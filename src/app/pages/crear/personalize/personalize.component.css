@@ -4,15 +4,25 @@
 }
 .container {
   text-align: center;
-  margin: 0px;
+ 
   display: flex;
   justify-content: space-between;
 }
 /* Estilos de step 1 add image */
 .columna-1-step-1{
-  display: grid;
-  grid-template-columns: 1fr 3fr 100px;
-  grid-template-rows: 200px 100px 100px;
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.primeracolumnacontenedorsetp1{
+  display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+   width: auto;
+   height: 100%;
+    
 }
 .upload-box {
   width: 250px;
@@ -65,10 +75,7 @@ canvas {
   grid-column: 3 / 4;
   grid-row: 1 / 2;
 }
-.address canvas {
-  grid-column: unset;
-  grid-row: unset;
-}
+
 
 .rotate-container {
   display: flex;
@@ -148,6 +155,10 @@ button {
   background-color: #0056b3; /* Cambio de color al pasar el mouse */
 }
 
+.mat-step-header {
+  pointer-events: none !important; /* Bloquea clics en los títulos */
+  cursor: default !important; /* Evita que se muestre la mano al pasar el mouse */
+}
 
 
 #finalCanvas , #canvasTresFinal{
@@ -170,7 +181,10 @@ button {
   font-family: 'Arial', sans-serif;
   margin: 0;
 }
-
+.address{
+  display: flex;
+  justify-content: center;
+}
 .order-summary {
   text-align: center;
   padding: 20px;
@@ -189,6 +203,8 @@ button {
   border-radius: 7px; /* Bordes redondeados generales */
   overflow-x: auto !important;
   max-width: 100% !important;
+  background-color: white;
+  margin: 23px;
 }
 .table-container {
   overflow-x: auto; 
@@ -306,10 +322,31 @@ h2{
     align-items: center;
     
   }
+  .primeracolumnacontenedorsetp1{
+    display: block;
+      flex-direction: column;
+      justify-content: space-around;
+     width: auto;
+     height: auto;
+      
+  }
   .upload-box{
     margin-bottom: 20px;
     position: relative;
     left: 15px;
+  }
+  .order-table {
+    margin:0px;
+  }
+}
+@media (max-width:860px) {
+  .address{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .order-table {
+    margin:auto;
   }
 }
 @media (max-width:450px) {
@@ -384,3 +421,17 @@ h2{
   }
 }
 
+
+.mat-step-header {
+  pointer-events: none !important; /* Deshabilita clics en los títulos */
+  cursor: default !important; /* Cambia el cursor para que no parezca clickeable */
+}
+
+
+.phone {
+  margin: auto;
+}
+
+.container, .container-md, .container-sm {
+  max-width: 100%;
+}

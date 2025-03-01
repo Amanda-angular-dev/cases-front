@@ -42,8 +42,14 @@ export class StateGlobalService {
   }
 
   obtenerCantidadPorNombreYBorderColor(array, borderColor, nombre) {
+    console.log('Array recibido:', array);
+    console.log('Buscando con borderColor:', borderColor, 'y nombre:', nombre);
     // Buscar el documento que coincida con los valores de nombre y borderColor
-    const documento = array.find(item => item.borderColor === borderColor && item.nombre === nombre);
+    const documento = array.find(item => 
+      item.borderColor?.trim().toLowerCase() === borderColor.trim().toLowerCase() &&
+      item.nombre?.trim().toLowerCase() === nombre.trim().toLowerCase()
+    );
+    
     console.log('se encontro este document'+documento)
     // Retornar el valor de cantidad si el documento existe, de lo contrario retornar null o un mensaje
     return documento.cantidad 
